@@ -201,7 +201,7 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
 
     /* Hero Section */
     .prop-hero {
-        height: 90vh; /* Full screen impact */
+        min-height: 100vh;
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -223,6 +223,8 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
         box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         max-width: 800px;
         width: 100%;
+        margin-top: 100px;
+        margin-bottom: 100px;
     }
 
     .badge.bg-gold {
@@ -351,15 +353,18 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
     @media (max-width: 991px) {
         .prop-hero {
             height: auto;
-            min-height: 80vh;
-            padding: 100px 0;
+            min-height: 100vh; /* Allow growth */
+            padding: 120px 0 80px 0;
+            display: flex;
+            align-items: center;
         }
         .display-2 {
-            font-size: 3rem;
+            font-size: 3.5rem; /* Smaller than desktop */
         }
         .glass-hero-card {
-            padding: 2rem !important;
-            margin: 0 1rem;
+            padding: 2.5rem !important;
+            margin: 0 15px;
+            max-width: 100%;
         }
         .contact-card.sticky-top {
             position: relative !important;
@@ -370,10 +375,24 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
     }
 
     @media (max-width: 768px) {
+        .display-2 { font-size: 2.5rem; }
+        .display-4 { font-size: 2rem; }
+        
         .stat-bubble i { font-size: 1.2rem !important; }
         .stat-bubble span { font-size: 0.9rem; }
-        .vert-line { height: 25px; }
+        .vert-line { height: 25px; display: none; } /* Hide lines on mobile */
         
+        /* Stack stats in a 2x2 grid or similar */
+        .glass-hero-card .d-flex.justify-content-center.gap-4 {
+            flex-wrap: wrap;
+            gap: 1.5rem !important;
+            justify-content: center;
+        }
+        .stat-bubble {
+            width: 40%; /* 2 per row */
+            margin-bottom: 0;
+        }
+
         .gallery-item.h-50 {
             height: 200px !important;
         }
@@ -383,20 +402,31 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
     }
 
     @media (max-width: 576px) {
-        .display-2 { font-size: 2.2rem; }
-        .display-4 { font-size: 1.8rem; }
-        .lead { font-size: 1rem !important; }
+        .glass-hero-card {
+            padding: 1.5rem !important;
+        }
+        .display-2 { 
+            font-size: 2rem; 
+            word-wrap: break-word; /* Prevent overflow */
+        }
+        .display-4 { font-size: 1.5rem; }
+        .lead { font-size: 0.95rem !important; }
         
-        /* Stack stats vertically on very small screens */
-        .glass-hero-card .d-flex.justify-content-center.gap-4 {
-            flex-wrap: wrap;
-            gap: 1rem !important;
+        .badge.bg-gold {
+            font-size: 0.7rem;
+            padding: 6px 12px;
         }
-        .vert-line { display: none; }
-        .stat-bubble {
-            width: 45%;
+
+        /* Stats: 3 per row is too tight, 2 per row is better, or stack */
+         .stat-bubble {
+            width: 100%; /* Stack vertically for clarity */
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+        .stat-bubble i { margin-bottom: 0 !important; }
         
         /* Gallery Adjustments due to stacking */
         .col-md-4 .d-flex.flex-column {
