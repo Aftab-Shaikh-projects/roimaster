@@ -886,9 +886,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100"><a class="nav-link" href="index.php">Home</a>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100"><a class="nav-link" href="index">Home</a>
                     </li>
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="about.php">About
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="about">About
                             Us</a></li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="300"><a class="nav-link"
                             href="properties">Properties</a></li>
