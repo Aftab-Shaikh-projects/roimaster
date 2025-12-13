@@ -14,11 +14,11 @@
             <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
                 <h5 class="mb-4 text-white">Navigation</h5>
                 <ul class="list-unstyled footer-links">
-                    <li class="mb-2"><a href="#">Home</a></li>
-                    <li class="mb-2"><a href="#">About Us</a></li>
-                    <li class="mb-2"><a href="#">Premium Properties</a></li>
-                    <li class="mb-2"><a href="#">Investment Guide</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li class="mb-2"><a href="index.php">Home</a></li>
+                    <li class="mb-2"><a href="about.php">About Us</a></li>
+                    <li class="mb-2"><a href="#">Properties</a></li>
+                    <li class="mb-2"><a href="#">Contact</a></li>
+                    
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-left" data-aos-delay="200">
@@ -26,14 +26,14 @@
                 <div class="footer-contact-item">
                     <i class="fa-solid fa-phone-volume"></i>
                     <div>
-                        <span class="d-block text-white">+91 98765 43210</span>
+                        <span class="d-block text-white">+91 7208565700</span>
                         <small>Mon - Sat, 9am - 7pm</small>
                     </div>
                 </div>
                 <div class="footer-contact-item mt-3">
                     <i class="fa-solid fa-envelope-open-text"></i>
                     <div>
-                        <span class="d-block text-white">invest@roimaster.com</span>
+                        <span class="d-block text-white">roimaster.official@gmail.com</span>
                         <small>For HNIs & Institutional Investors</small>
                     </div>
                 </div>
@@ -42,11 +42,11 @@
         <hr class="border-secondary mt-5 opacity-25">
         <div class="row align-items-center text-white-50">
             <div class="col-md-6">
-                <small>&copy; 2024 ROIMaster. All rights reserved.</small>
+                <small>&copy; 2025 ROIMaster. All rights reserved.</small>
             </div>
             <div class="col-md-6 text-md-end">
-                <small class="me-3"><a href="#">Privacy Policy</a></small>
-                <small><a href="#">Terms of Service</a></small>
+            <div class="footer-credit">Design and Developed By <span style="color: #247bb5;">Nexg</span><span
+            style="color: #fff;">enn</span> <span style="color: red;">Technologies</span></div>
             </div>
         </div>
     </div>
