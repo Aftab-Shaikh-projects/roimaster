@@ -346,7 +346,6 @@
             position: relative;
             z-index: 3;
             /* Top */
-            max-width: 800px;
             padding: 0 20px;
         }
 
@@ -849,6 +848,20 @@
                 font-size: 24px;
                 bottom: 20px;
                 right: 20px;
+            }
+
+            /* Fix Mobile Nav Spacing */
+            .nav-link {
+                margin-left: 0 !important;
+                padding: 10px 0;
+            }
+
+            .btn-contact {
+                margin-left: 0 !important;
+                margin-top: 15px;
+                display: block;
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
