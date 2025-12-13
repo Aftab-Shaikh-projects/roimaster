@@ -16,9 +16,9 @@
                 <ul class="list-unstyled footer-links">
                     <li class="mb-2"><a href="index.php">Home</a></li>
                     <li class="mb-2"><a href="about.php">About Us</a></li>
-                    <li class="mb-2"><a href="#">Properties</a></li>
-                    <li class="mb-2"><a href="#">Contact</a></li>
-                    
+                    <li class="mb-2"><a href="properties.php">Properties</a></li>
+                    <li class="mb-2"><a href="contact.php">Contact</a></li>
+
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-left" data-aos-delay="200">
@@ -27,7 +27,7 @@
                     <i class="fa-solid fa-phone-volume"></i>
                     <div>
                         <span class="d-block text-white">+91 7208565700</span>
-                        <small>Mon - Sat, 9am - 7pm</small>
+                        <small>Mon - Sun, 10am - 7pm</small>
                     </div>
                 </div>
                 <div class="footer-contact-item mt-3">
@@ -324,7 +324,7 @@
 </script>
 
 <!-- WhatsApp Button -->
-<a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/917208565700" class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
 </body>

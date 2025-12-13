@@ -906,7 +906,7 @@
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="300"><a class="nav-link"
                             href="properties">Properties</a></li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
-                        <a class="btn btn-contact ms-3" href="#">Contact Us</a>
+                        <a class="btn btn-contact ms-3" href="contact">Contact Us</a>
                     </li>
                 </ul>
             </div>
