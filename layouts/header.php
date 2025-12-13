@@ -891,7 +891,7 @@
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="#">About
                             Us</a></li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="300"><a class="nav-link"
-                            href="#">Properties</a></li>
+                            href="properties">Properties</a></li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
                         <a class="btn btn-contact ms-3" href="#">Contact Us</a>
                     </li>
