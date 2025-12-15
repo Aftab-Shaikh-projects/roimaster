@@ -42,8 +42,16 @@ if (isset($_GET['id'])) {
 <!-- Hero Section -->
 
 <!-- Ultra Premium Hero Section -->
-<section class="prop-hero d-flex align-items-center justify-content-center" style="background-image: url('<?php echo $prop['image']; ?>');">
-    <div class="hero-overlay"></div>
+<?php 
+$hero_img = $prop['image'];
+$ext = strtolower(pathinfo($hero_img, PATHINFO_EXTENSION));
+$hero_is_video = in_array($ext, ['mp4', 'webm']);
+?>
+<section class="prop-hero d-flex align-items-center justify-content-center" style="position: relative; overflow: hidden; <?php echo !$hero_is_video ? "background-image: url('$hero_img');" : ""; ?>">
+    <?php if($hero_is_video): ?>
+        <video src="<?= $hero_img ?>" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;"></video>
+    <?php endif; ?>
+    <div class="hero-overlay" style="z-index: 1;"></div>
     <div class="container position-relative z-2 text-center" data-aos="zoom-in" data-aos-duration="1000">
         <div class="glass-hero-card p-5 d-inline-block mx-auto">
             <span class="badge bg-gold text-dark mb-4 px-4 py-2 fw-bold text-uppercase tracking-wider">For Sale</span>
@@ -92,49 +100,61 @@ if (isset($_GET['id'])) {
                 <div class="mb-5" data-aos="fade-up">
                     <h3 class="fw-bold mb-4 text-primary-deep section-heading">Property Gallery</h3>
                     
-                    <?php if ($total_images >= 3): ?>
-                        <!-- Creative Grid (1 Big, 2 Small) -->
-                        <div class="row g-3">
-                            <div class="col-md-8">
-                                <a href="<?= $gallery_images[0] ?>" data-fancybox="gallery" class="gallery-item h-100 d-block">
-                                    <img src="<?= $gallery_images[0] ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Main View">
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="d-flex flex-column gap-3 h-100">
-                                    <!-- Image 2 -->
-                                    <a href="<?= $gallery_images[1] ?>" data-fancybox="gallery" class="gallery-item h-50 d-block">
-                                        <img src="<?= $gallery_images[1] ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Gallery 2">
-                                    </a>
-                                    
-                                    <!-- Image 3 (With possible overlay) -->
-                                    <?php 
-                                        $remaining = $total_images - 3; 
-                                        $has_more = $remaining > 0;
-                                    ?>
-                                    <a href="<?= $gallery_images[2] ?>" data-fancybox="gallery" class="gallery-item h-50 d-block position-relative">
-                                        <img src="<?= $gallery_images[2] ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Gallery 3">
-                                        <?php if ($has_more): ?>
-                                        <div class="gallery-overlay d-flex align-items-center justify-content-center">
-                                            <span class="fw-bold text-white fs-5">+<?= $remaining ?> Photos</span>
-                                        </div>
-                                        <?php endif; ?>
+                        <?php 
+                        function render_gallery_item($src, $class="img-fluid rounded-3 h-100 w-100 object-fit-cover") {
+                            $ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
+                            if (in_array($ext, ['mp4', 'webm'])) {
+                                echo '<video src="'.$src.'" class="'.$class.'" autoplay muted loop playsinline></video>';
+                            } else {
+                                echo '<img src="'.$src.'" class="'.$class.'" alt="Property Image">';
+                            }
+                        }
+                        ?>
+
+                        <?php if ($total_images >= 3): ?>
+                            <!-- Creative Grid (1 Big, 2 Small) -->
+                            <div class="row g-3">
+                                <div class="col-md-8">
+                                    <a href="<?= $gallery_images[0] ?>" data-fancybox="gallery" class="gallery-item h-100 d-block">
+                                        <?php render_gallery_item($gallery_images[0]); ?>
                                     </a>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column gap-3 h-100">
+                                        <!-- Image 2 -->
+                                        <a href="<?= $gallery_images[1] ?>" data-fancybox="gallery" class="gallery-item h-50 d-block">
+                                            <?php render_gallery_item($gallery_images[1]); ?>
+                                        </a>
+                                        
+                                        <!-- Image 3 (With possible overlay) -->
+                                        <?php 
+                                            $remaining = $total_images - 3; 
+                                            $has_more = $remaining > 0;
+                                        ?>
+                                        <a href="<?= $gallery_images[2] ?>" data-fancybox="gallery" class="gallery-item h-50 d-block position-relative">
+                                            <?php render_gallery_item($gallery_images[2]); ?>
+                                            <?php if ($has_more): ?>
+                                            <div class="gallery-overlay d-flex align-items-center justify-content-center">
+                                                <span class="fw-bold text-white fs-5">+<?= $remaining ?> Photos</span>
+                                            </div>
+                                            <?php endif; ?>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Hidden links for remaining images to show in Fancybox -->
-                        <?php for($i = 3; $i < $total_images; $i++): ?>
-                            <a href="<?= $gallery_images[$i] ?>" data-fancybox="gallery" class="d-none"></a>
-                        <?php endfor; ?>
+                            
+                            <!-- Hidden links for remaining images to show in Fancybox -->
+                            <?php for($i = 3; $i < $total_images; $i++): ?>
+                                <a href="<?= $gallery_images[$i] ?>" data-fancybox="gallery" class="d-none"></a>
+                            <?php endfor; ?>
 
-                    <?php else: ?>
-                        <!-- Simple Grid (< 3 images) -->
-                        <div class="row g-3">
-                            <?php foreach($gallery_images as $img): ?>
-                            <div class="col-md-6">
-                                <a href="<?= $img ?>" data-fancybox="gallery" class="gallery-item h-100 d-block">
+                        <?php else: ?>
+                            <!-- Simple Grid (< 3 images) -->
+                            <div class="row g-3">
+                                <?php foreach($gallery_images as $img): ?>
+                                <div class="col-md-6">
+                                    <a href="<?= $img ?>" data-fancybox="gallery" class="gallery-item h-100 d-block">
+                                        <?php render_gallery_item($img); ?>
                                     <img src="<?= $img ?>" class="img-fluid rounded-3 w-100 object-fit-cover" style="height: 300px;" alt="Gallery">
                                 </a>
                             </div>

@@ -17,7 +17,14 @@ $prop_res = mysqli_query($conn, $prop_sql);
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="property-card-modern">
                     <a href="property-details.php?id=<?= enc($row['id']) ?>" class="card-img-wrapper d-block">
+                        <?php 
+                        $ext = strtolower(pathinfo($img_src, PATHINFO_EXTENSION));
+                        if(in_array($ext, ['mp4', 'webm'])): 
+                        ?>
+                        <video src="<?= $img_src ?>" class="card-img-top object-fit-cover" autoplay muted loop playsinline></video>
+                        <?php else: ?>
                         <img src="<?= $img_src ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+                        <?php endif; ?>
                         <div class="card-overlay-info">
                             <span><i class="fa-solid fa-expand me-2"></i>View Details</span>
                         </div>

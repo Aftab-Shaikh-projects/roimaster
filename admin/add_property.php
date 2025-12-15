@@ -144,18 +144,24 @@ if (isset($_GET["id"])) {
             <div class="row g-4">
               <div class="col-md-12">
                 <label for="image" class="form-label">Main Image <span class="text-danger">*</span></label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                <input type="file" class="form-control" id="image" name="image" accept="image/*,video/mp4,video/webm">
                 
                 <?php if (isset($prop) && !empty($prop['image'])): 
                     $img_src = $prop['image'];
                     if (!filter_var($img_src, FILTER_VALIDATE_URL)) {
                         $img_src = "../" . $img_src; 
                     }
+                    $ext = strtolower(pathinfo($img_src, PATHINFO_EXTENSION));
+                    $is_video = in_array($ext, ['mp4', 'webm']);
                 ?>
                     <div class="mt-2">
-                        <small class="text-muted">Current Image:</small>
+                        <small class="text-muted">Current Media:</small>
                         <div class="d-flex align-items-center mt-1">
-                            <img src="<?= $img_src ?>" alt="Current" class="rounded shadow-sm" style="width: 100px; height: 60px; object-fit: cover;">
+                            <?php if($is_video): ?>
+                                <video src="<?= $img_src ?>" class="rounded shadow-sm" style="width: 100px; height: 60px; object-fit: cover;" autoplay muted loop></video>
+                            <?php else: ?>
+                                <img src="<?= $img_src ?>" alt="Current" class="rounded shadow-sm" style="width: 100px; height: 60px; object-fit: cover;">
+                            <?php endif; ?>
                             <span class="ms-2 text-muted small text-break"><?= htmlspecialchars($prop['image']) ?></span>
                         </div>
                     </div>

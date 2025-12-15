@@ -35,8 +35,14 @@ $gal_res = mysqli_query($conn, $gal_sql);
                 if (!filter_var($img_src, FILTER_VALIDATE_URL)) {
                     $img_src = "../" . $img_src; 
                 }
+                $ext = strtolower(pathinfo($img_src, PATHINFO_EXTENSION));
+                $is_video = in_array($ext, ['mp4', 'webm']);
                 ?>
-                <img src="<?= $img_src ?>" class="img-fluid rounded-3 mb-3 w-100" style="height: 200px; object-fit: cover;" alt="Main Image">
+                <?php if($is_video): ?>
+                    <video src="<?= $img_src ?>" class="rounded-3 mb-3 w-100" style="height: 300px; object-fit: cover;" controls></video>
+                <?php else: ?>
+                    <img src="<?= $img_src ?>" class="img-fluid rounded-3 mb-3 w-100" style="height: 200px; object-fit: cover;" alt="Main Image">
+                <?php endif; ?>
                 <h4 class="fw-bold mb-1"><?= $prop['title'] ?></h4>
                 <p class="text-muted mb-3"><i class="bx bx-map"></i> <?= ucwords($prop['sub_location']) . ', ' . ucwords($prop['city']) ?></p>
                 

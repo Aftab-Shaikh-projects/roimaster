@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $file_name = $_FILES['image']['name'];
         $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-        $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+        $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'webm'];
         
         if (in_array($file_ext, $allowed)) {
             $new_name = uniqid('PROP_', true) . '.' . $file_ext;
