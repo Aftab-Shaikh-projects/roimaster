@@ -122,7 +122,113 @@
 <!-- Property Listing Section -->
 <section class="section-padding bg-offwhite">
     <div class="container">
-        <?php include 'components/property_grid.php'; ?>
+        <!-- Property Grid with Filters -->
+        <div class="row g-5" id="property-grid">
+            <?php
+            // --- FILTER LOGIC ---
+            $where = ["`active`='Y'"];
+            
+            // 1. City (Exact Match)
+            if(isset($_GET['city']) && !empty($_GET['city'])) {
+                $city = mysqli_real_escape_string($conn, strtolower($_GET['city']));
+                $where[] = "LOWER(`city`) = '$city'";
+            }
+
+            // 2. Sub Location (Partial Match)
+            if(isset($_GET['sub_location']) && !empty($_GET['sub_location'])) {
+                $sub = mysqli_real_escape_string($conn, $_GET['sub_location']);
+                $where[] = "`sub_location` LIKE '%$sub%'";
+            }
+
+            // 3. ROI (Partial Match)
+            if(isset($_GET['roi']) && !empty($_GET['roi'])) {
+                 $roi = mysqli_real_escape_string($conn, $_GET['roi']);
+                 $where[] = "`roi` LIKE '%$roi%'";
+            }
+
+            // 4. Budget Logic
+            if(isset($_GET['budget']) && !empty($_GET['budget'])) {
+                $budget = $_GET['budget'];
+                if($budget == '50l') {
+                    $where[] = "`price` <= 5000000";
+                } elseif($budget == '1cr') {
+                    $where[] = "`price` <= 10000000";
+                } elseif($budget == '5cr') {
+                    $where[] = "`price` <= 50000000";
+                } elseif($budget == '10cr+') {
+                    $where[] = "`price` >= 100000000";
+                }
+            }
+            
+            // 5. Asset Type & Config
+            if(isset($_GET['type']) && !empty($_GET['type'])) {
+                $type = mysqli_real_escape_string($conn, $_GET['type']);
+                
+                if($type == 'residential') {
+                     $where[] = "(`type` = 'Residential' OR `type` = 'Villa' OR `type` = 'Plot')"; 
+                     if(isset($_GET['bhk_config']) && !empty($_GET['bhk_config'])) {
+                         $bhk = mysqli_real_escape_string($conn, $_GET['bhk_config']);
+                         $where[] = "`bhk` LIKE '%$bhk%'";
+                     }
+                } 
+                elseif($type == 'commercial') {
+                    $where[] = "`type` = 'Commercial'";
+                    if(isset($_GET['comm_config']) && !empty($_GET['comm_config'])) {
+                         $comm = mysqli_real_escape_string($conn, $_GET['comm_config']);
+                         $where[] = "`comm_type` = '$comm'";
+                     }
+                }
+            }
+
+            // Construct Query
+            $sql = "SELECT * FROM `properties`";
+            if(count($where) > 0) {
+                $sql .= " WHERE " . implode(" AND ", $where);
+            }
+            $sql .= " ORDER BY `id` DESC";
+            
+            $prop_res = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($prop_res) > 0):
+                while ($row = mysqli_fetch_assoc($prop_res)): 
+                    $img_src = $row['image'];
+                    ?>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="property-card-modern">
+                            <a href="property-details.php?id=<?= enc($row['id']) ?>" class="card-img-wrapper d-block">
+                                <img src="<?= $img_src ?>" class="card-img-top" alt="<?= htmlspecialchars($row['title']) ?>">
+                                <div class="card-overlay-info">
+                                    <span><i class="fa-solid fa-expand me-2"></i>View Details</span>
+                                </div>
+                            </a>
+                            <div class="card-body-modern">
+                                <span class="roi-badge-floating">Premium</span>
+                                <span class="price-tag-modern"><?= format_price_indian($row['price']) ?></span>
+                                <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
+                                <p class="text-muted mb-4"><i class="fa-solid fa-location-dot me-2"
+                                        style="color: var(--accent-rich);"></i><?= htmlspecialchars($row['location']) ?></p>
+
+                                <div class="prop-features-modern">
+                                    <span><i class="fa-solid fa-bed me-2"></i> <?= htmlspecialchars($row['bhk']) ?></span>
+                                    <span><i class="fa-solid fa-ruler-combined me-2"></i> <?= htmlspecialchars($row['area']) ?></span>
+                                </div>
+                                <hr class="opacity-25 my-3">
+                                <div class="d-flex justify-content-between align-items-center text-muted small">
+                                    <span><i class="fa-solid fa-hotel me-2"></i><?= htmlspecialchars($row['type']) ?></span>
+                                    <span><i class="fa-solid fa-calendar-check me-2"></i><?= htmlspecialchars($row['possession']) ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endwhile; 
+            else: ?>
+                <div class="col-12 text-center py-5">
+                    <h3 class="text-muted">No Properties Found</h3>
+                    <p>Try adjusting your filters to see more results.</p>
+                    <a href="properties.php" class="btn btn-outline-primary mt-3">Clear Filters</a>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 </section>
 

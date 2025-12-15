@@ -26,16 +26,23 @@
         </div>
 
         <div class="filter-container gs-reveal">
-            <form action="#" method="GET">
+            <form action="properties.php" method="GET">
                 <div class="row g-4">
 
                     <div class="col-md-3">
                         <label class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
-                        <select class="form-select" name="location">
-                            <option selected disabled>Select City</option>
-                            <option value="mumbai">Mumbai</option>
-                            <option value="pune">Pune</option>
-                            <option value="delhi">Delhi</option>
+                        <select class="form-select" name="city">
+                            <option value="">All Cities</option>
+                            <?php
+                            // Fetch Cities dynamically if valid connection exists
+                            if(isset($conn)) {
+                                $c_sql = "SELECT * FROM `city_master` WHERE `active`='Y' ORDER BY `name` ASC";
+                                $c_res = mysqli_query($conn, $c_sql);
+                                while($row = mysqli_fetch_assoc($c_res)) {
+                                    echo '<option value="'.$row['name'].'">'.ucwords($row['name']).'</option>';
+                                }
+                            }
+                            ?>
                         </select>
                     </div>
 
