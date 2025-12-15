@@ -19,9 +19,9 @@ class Config
         break;
 
       default:
-        self::$username = "";
-        self::$password = "";
-        self::$dbname = "";
+        self::$username = "u483526650_roimaster";
+        self::$password = "3qH;P&|Rc#W2";
+        self::$dbname = "u483526650_roimaster";
         break;
     }
   }
