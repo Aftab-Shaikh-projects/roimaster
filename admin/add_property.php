@@ -53,11 +53,46 @@ if (isset($_GET["id"])) {
                 <div class="form-text">Enter full amount (e.g. 15000000 for 1.5 Cr). System will format it automatically.</div>
               </div>
 
-               <div class="col-md-12">
-                <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="location" name="location"
-                  value="<?= isset($prop) ? htmlspecialchars($prop['location']) : '' ?>" placeholder="e.g. Powai, Mumbai" required>
+              <div class="col-md-6">
+                <label for="roi" class="form-label">Target ROI</label>
+                <input type="text" class="form-control form-control-lg" id="roi" name="roi"
+                  value="<?= isset($prop) ? htmlspecialchars($prop['roi']) : '' ?>" placeholder="e.g. 6%">
               </div>
+
+
+               <div class="col-md-6">
+                <label for="location" class="form-label">City <span class="text-danger">*</span></label>
+                <select class="form-select" id="city" name="city" required>
+                  <option value="">-- Select City --</option>
+                  <?php
+                    $city_sql = "SELECT * FROM `city_master` WHERE `active`='Y' ORDER BY `name` ASC";
+                    $city_res = mysqli_query($conn, $city_sql);
+                    if(mysqli_num_rows($city_res) > 0) {
+                        while($row = mysqli_fetch_assoc($city_res)) {
+                            $db_city = $row['name']; // Stored as lowercase usually, or whatever is in DB
+                            $disp_city = ucwords($row['name']); // Display as Capitalized
+                            $selected = (isset($prop) && strtolower($prop['city']) == strtolower($db_city)) ? 'selected' : '';
+                            echo "<option value='".$db_city."' $selected>".$disp_city."</option>";
+                        }
+                    }
+                  ?>
+                  <option value="Other" <?= isset($prop) && $prop['city'] == 'Other' ? 'selected' : '' ?>>Other (Add New)</option>
+                </select>
+              </div>
+
+               <div class="col-md-6" id="city_new_div" style="display: none;">
+                <label for="city_new" class="form-label">Enter New City <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="city_new" name="city_new" placeholder="e.g. Hyderabad">
+              </div>
+
+               <div class="col-md-6">
+                <label for="sub_location" class="form-label">Sub Location / Area <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="sub_location" name="sub_location"
+                  value="<?= isset($prop) ? htmlspecialchars($prop['sub_location']) : '' ?>" placeholder="e.g. Bandra West" required>
+              </div>
+              
+              <!-- Hidden Location Field for Backward Compatibility if needed, or we construct it on save -->
+              <input type="hidden" name="location" value="<?= isset($prop) ? htmlspecialchars($prop['location']) : '' ?>">
             </div>
           </div>
 
@@ -85,6 +120,15 @@ if (isset($_GET["id"])) {
                   <option value="Commercial" <?= isset($prop) && $prop['type'] == 'Commercial' ? 'selected' : '' ?>>Commercial</option>
                   <option value="Villa" <?= isset($prop) && $prop['type'] == 'Villa' ? 'selected' : '' ?>>Villa</option>
                   <option value="Plot" <?= isset($prop) && $prop['type'] == 'Plot' ? 'selected' : '' ?>>Plot</option>
+                </select>
+              </div>
+              
+              <div class="col-md-3" id="comm_type_div" style="display: none;">
+                <label for="comm_type" class="form-label">Commercial Type</label>
+                 <select class="form-select" id="comm_type" name="comm_type">
+                  <option value="">-- Select --</option>
+                  <option value="office" <?= isset($prop) && $prop['comm_type'] == 'office' ? 'selected' : '' ?>>Grade A Office Space</option>
+                  <option value="shop" <?= isset($prop) && $prop['comm_type'] == 'shop' ? 'selected' : '' ?>>High Street Retail / Shop</option>
                 </select>
               </div>
               
@@ -163,3 +207,38 @@ if (isset($_GET["id"])) {
 </section>
 
 <?php include 'layouts/footer.php'; ?>
+
+<script>
+    // Commercial Type Toggle
+    const typeSelect = document.getElementById('type');
+    const commTypeDiv = document.getElementById('comm_type_div');
+    
+    function toggleComm() {
+        if(typeSelect.value === 'Commercial') {
+            commTypeDiv.style.display = 'block';
+        } else {
+            commTypeDiv.style.display = 'none';
+        }
+    }
+    
+    typeSelect.addEventListener('change', toggleComm);
+    toggleComm(); // Run on load
+    
+    // City "Other" Toggle
+    const citySelect = document.getElementById('city');
+    const cityNewDiv = document.getElementById('city_new_div');
+    const cityNewInput = document.getElementById('city_new'); // Get input to toggle required
+    
+    function toggleCity() {
+        if(citySelect.value === 'Other') {
+            cityNewDiv.style.display = 'block';
+            cityNewInput.setAttribute('required', 'required');
+        } else {
+            cityNewDiv.style.display = 'none';
+            cityNewInput.removeAttribute('required');
+        }
+    }
+    
+    citySelect.addEventListener('change', toggleCity);
+    toggleCity(); // Run on load
+</script>

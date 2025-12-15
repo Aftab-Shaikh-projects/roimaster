@@ -40,6 +40,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = res($_POST["description"]);
     $features = res($_POST["features"]); 
     $active = res($_POST["active"]);
+    
+    // New Fields
+    $roi = res($_POST["roi"]);
+    
+    // City Logic
+    $city_input = res($_POST["city"]);
+    $city_new = isset($_POST["city_new"]) ? res($_POST["city_new"]) : '';
+    
+    if($city_input == 'Other' && !empty($city_new)) {
+        // Use the new city name
+        $final_city = strtolower(trim($city_new));
+        
+        // Add to City Master if not exists
+        $chk_city = mysqli_query($conn, "SELECT * FROM `city_master` WHERE `name`='$final_city'");
+        if(mysqli_num_rows($chk_city) == 0) {
+            mysqli_query($conn, "INSERT INTO `city_master` (`name`) VALUES ('$final_city')");
+        }
+        
+        $city = $final_city;
+    } else {
+        // Use selected city
+        $city = strtolower(trim($city_input));
+    }
+
+    $sub_location = res($_POST["sub_location"]);
+    $comm_type = res($_POST["comm_type"]);
 
     // Handle Image Upload
     $image = "";
@@ -83,6 +109,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               `map_url`='$map_url', 
               `description`='$description', 
               `features`='$features',
+              `roi`='$roi',
+              `city`='$city',
+              `sub_location`='$sub_location',
+              `comm_type`='$comm_type',
               `active`='$active'
               WHERE `id`='$edit_id'";
 
@@ -100,8 +130,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            // For now, let it be empty or require validation frontend side (which is there).
       }
       
-      $sql = "INSERT INTO `properties` (`title`, `price`, `location`, `bhk`, `area`, `type`, `possession`, `image`, `map_url`, `description`, `features`, `active`) 
-              VALUES ('$title', '$price', '$location', '$bhk', '$area', '$type', '$possession', '$image', '$map_url', '$description', '$features', '$active')";
+      $sql = "INSERT INTO `properties` (`title`, `price`, `location`, `bhk`, `area`, `type`, `possession`, `image`, `map_url`, `description`, `features`, `roi`, `city`, `sub_location`, `comm_type`, `active`) 
+              VALUES ('$title', '$price', '$location', '$bhk', '$area', '$type', '$possession', '$image', '$map_url', '$description', '$features', '$roi', '$city', '$sub_location', '$comm_type', '$active')";
 
       if (mysqli_query($conn, $sql)) {
         set_alert("Property Added Successfully", "success", "");
