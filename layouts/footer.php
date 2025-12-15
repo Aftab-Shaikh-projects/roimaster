@@ -6,9 +6,8 @@
                 <p class="text-white-50 lead">Redefining real estate investment through intelligence, integrity, and
                     exclusive access to premium assets.</p>
                 <div class="mt-4">
-                    <a href="#" class="text-white me-3"><i class="fa-brands fa-linkedin fa-lg"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fa-brands fa-twitter fa-lg"></i></a>
-                    <a href="#" class="text-white"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    <a href="https://www.facebook.com/share/1CwM5K8fSf/" class="text-white me-3" target="_blank"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                    <a href="https://www.instagram.com/roi_master_/?hl=en" class="text-white" target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
