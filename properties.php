@@ -14,8 +14,14 @@
                         <ol class="breadcrumb justify-content-center">
                             <li class="breadcrumb-item"><a href="./">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Properties</li>
+                            <li class="breadcrumb-item active" aria-current="page">Properties</li>
                         </ol>
                     </nav>
+                        </ol>
+                    </nav>
+                    <button type="button" class="btn btn-premium-filter shadow-lg" data-bs-toggle="modal" data-bs-target="#filterModal">
+                        <i class="fa-solid fa-filter me-2"></i>Filter Projects
+                    </button>
                 </div>
             </div>
         </div>
@@ -114,6 +120,70 @@
         .hero-text-box { padding: 30px 20px; }
         .page-title { font-size: 2.5rem; }
         .page-title-section { min-height: 50vh; }
+    }
+
+    /* --- Premium Filter Button --- */
+    .btn-premium-filter {
+        background: var(--primary-deep);
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 12px 30px;
+        border: 1px solid var(--accent-rich);
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        margin-top: 30px;
+        display: inline-block;
+    }
+    .btn-premium-filter:hover {
+        background: var(--accent-rich);
+        color: var(--primary-deep);
+        transform: translateY(-2px);
+    }
+
+    /* --- Light Theme Modal --- */
+    .modal-premium-content {
+        background: #fff;
+        border: none;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        color: var(--primary-deep);
+    }
+    .modal-premium-header {
+        background: var(--primary-deep);
+        color: #fff;
+        border-bottom: 2px solid var(--accent-rich);
+    }
+    .modal-premium-header .btn-close {
+        filter: invert(1);
+    }
+    .modal-premium-body {
+        padding: 30px;
+    }
+    .modal-premium-body label {
+        color: var(--primary-deep);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .modal-premium-body .form-select,
+    .modal-premium-body .form-control {
+        background: #f8f9fa;
+        border: 1px solid #ddd;
+        color: var(--primary-deep);
+        padding: 10px 15px;
+    }
+    .modal-premium-body .form-select:focus,
+    .modal-premium-body .form-control:focus {
+        background: #fff;
+        border-color: var(--accent-rich);
+        box-shadow: none;
+    }
+    .modal-premium-body option {
+        background: #fff;
+        color: #000;
     }
 </style>
 
@@ -231,5 +301,125 @@
         </div>
     </div>
 </section>
+
+<!-- Filter Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content modal-premium-content">
+            <div class="modal-header modal-premium-header text-white">
+                <h5 class="modal-title" id="filterModalLabel"><i class="fa-solid fa-sliders me-2 text-white"></i>Filter Properties</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-premium-body">
+                <form action="properties.php" method="GET">
+                    <div class="row g-3">
+                        <!-- City -->
+                        <div class="col-md-6">
+                            <label class="form-label">Location</label>
+                            <select class="form-select" name="city">
+                                <option value="">All Cities</option>
+                                <?php
+                                $c_sql = "SELECT * FROM `city_master` WHERE `active`='Y' ORDER BY `name` ASC";
+                                $c_res = mysqli_query($conn, $c_sql);
+                                $curr_city = isset($_GET['city']) ? strtolower($_GET['city']) : '';
+                                while($row = mysqli_fetch_assoc($c_res)) {
+                                    $sel = (strtolower($row['name']) == $curr_city) ? 'selected' : '';
+                                    echo '<option value="'.$row['name'].'" '.$sel.'>'.ucwords($row['name']).'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        
+                        <!-- Sub Location -->
+                        <div class="col-md-6">
+                            <label class="form-label">Sub Location</label>
+                             <input type="text" class="form-control" name="sub_location" 
+                                    value="<?= isset($_GET['sub_location']) ? htmlspecialchars($_GET['sub_location']) : '' ?>" 
+                                    placeholder="e.g. Bandra">
+                        </div>
+
+                        <!-- Budget -->
+                        <div class="col-md-6">
+                            <label class="form-label">Budget</label>
+                            <select class="form-select" name="budget">
+                                <option value="" selected>Any Budget</option>
+                                <option value="50l" <?= (isset($_GET['budget']) && $_GET['budget'] == '50l') ? 'selected' : '' ?>>Up to 50 Lacs</option>
+                                <option value="1cr" <?= (isset($_GET['budget']) && $_GET['budget'] == '1cr') ? 'selected' : '' ?>>Up to 1 Cr</option>
+                                <option value="5cr" <?= (isset($_GET['budget']) && $_GET['budget'] == '5cr') ? 'selected' : '' ?>>Up to 5 Cr</option>
+                                <option value="10cr+" <?= (isset($_GET['budget']) && $_GET['budget'] == '10cr+') ? 'selected' : '' ?>>10 Cr+</option>
+                            </select>
+                        </div>
+
+                        <!-- ROI -->
+                        <div class="col-md-6">
+                            <label class="form-label">Target ROI</label>
+                            <input type="text" class="form-control" name="roi" 
+                                   value="<?= isset($_GET['roi']) ? htmlspecialchars($_GET['roi']) : '' ?>" 
+                                   placeholder="e.g. 6%">
+                        </div>
+
+                        <!-- Type -->
+                         <div class="col-md-6">
+                            <label class="form-label">Asset Type</label>
+                            <select class="form-select" id="propertyTypeById" name="type" onchange="toggleConfigById()">
+                                <option value="residential" <?= (isset($_GET['type']) && $_GET['type'] == 'residential') ? 'selected' : '' ?>>Residential</option>
+                                <option value="commercial" <?= (isset($_GET['type']) && $_GET['type'] == 'commercial') ? 'selected' : '' ?>>Commercial</option>
+                            </select>
+                        </div>
+
+                        <!-- Configuration -->
+                         <div class="col-md-6">
+                            <label class="form-label">Configuration</label>
+                            
+                             <div id="residentialOptionsById">
+                                <select class="form-select" name="bhk_config">
+                                    <option value="">Any BHK</option>
+                                    <?php $sel_bhk = isset($_GET['bhk_config']) ? $_GET['bhk_config'] : ''; ?>
+                                    <option value="1" <?= $sel_bhk == '1' ? 'selected' : '' ?>>1 BHK</option>
+                                    <option value="2" <?= $sel_bhk == '2' ? 'selected' : '' ?>>2 BHK</option>
+                                    <option value="3" <?= $sel_bhk == '3' ? 'selected' : '' ?>>3 BHK</option>
+                                    <option value="4" <?= $sel_bhk == '4' ? 'selected' : '' ?>>4 BHK</option>
+                                    <option value="5" <?= $sel_bhk == '5' ? 'selected' : '' ?>>5 BHK</option>
+                                </select>
+                             </div>
+
+                             <div id="commercialOptionsById" style="display: none;">
+                                <select class="form-select" name="comm_config">
+                                    <option value="">Any Type</option>
+                                    <?php $sel_comm = isset($_GET['comm_config']) ? $_GET['comm_config'] : ''; ?>
+                                    <option value="office" <?= $sel_comm == 'office' ? 'selected' : '' ?>>Grade A Office Space</option>
+                                    <option value="shop" <?= $sel_comm == 'shop' ? 'selected' : '' ?>>High Street Retail</option>
+                                </select>
+                             </div>
+                        </div>
+
+                        <div class="col-12 text-end mt-4">
+                             <a href="properties.php" class="btn btn-outline-light me-2">Reset</a>
+                             <button type="submit" class="btn btn-premium-filter px-5">Search Results</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleConfigById() {
+        const type = document.getElementById('propertyTypeById').value;
+        const resOpts = document.getElementById('residentialOptionsById');
+        const commOpts = document.getElementById('commercialOptionsById');
+
+        if(type === 'commercial') {
+            resOpts.style.display = 'none';
+            commOpts.style.display = 'block';
+        } else {
+            resOpts.style.display = 'block';
+            commOpts.style.display = 'none';
+        }
+    }
+    // Run on load to set correct state
+    window.addEventListener('load', toggleConfigById);
+</script>
 
 <?php include 'layouts/footer.php'; ?>
