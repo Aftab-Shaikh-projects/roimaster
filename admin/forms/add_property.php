@@ -31,7 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ADD / EDIT
     $title = res($_POST["title"]);
     $price = res($_POST["price"]);
-    $location = res($_POST["location"]);
+    // Auto-construct Location string for DB (Standardized format)
+    // We do this AFTER resolving city logic below
+    
     $bhk = res($_POST["bhk"]);
     $area = res($_POST["area"]);
     $type = res($_POST["type"]);
@@ -65,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $sub_location = res($_POST["sub_location"]);
+    $location = ucwords($sub_location) . ", " . ucwords($city); // Auto-generate location
     $comm_type = res($_POST["comm_type"]);
 
     // Handle Image Upload

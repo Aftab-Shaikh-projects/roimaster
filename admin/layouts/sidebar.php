@@ -33,6 +33,11 @@
         <i class="menu-icon tf-icons bx bx-plus-circle"></i>
         <div>Add Property</div>
       </a>
+    <li class="menu-item">
+      <a href="enquiries.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-message-square-detail"></i>
+        <div>Enquiries</div>
+      </a>
     </li>
 
     <!-- Logout (Optional but good to have explicit) -->

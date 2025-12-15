@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
         <div class="glass-hero-card p-5 d-inline-block mx-auto">
             <span class="badge bg-gold text-dark mb-4 px-4 py-2 fw-bold text-uppercase tracking-wider">For Sale</span>
             <h1 class="display-2 fw-bold text-white mb-2" style="font-family: 'Playfair Display', serif;"><?php echo htmlspecialchars($prop['title']); ?></h1>
-            <p class="lead text-white-80 mb-4 fs-4"><i class="fa-solid fa-location-dot me-2 text-gold"></i><?php echo htmlspecialchars($prop['location']); ?></p>
+            <p class="lead text-white-80 mb-4 fs-4"><i class="fa-solid fa-location-dot me-2 text-gold"></i><?php echo htmlspecialchars(ucwords($prop['sub_location']) . ', ' . ucwords($prop['city'])); ?></p>
             <h2 class="text-gold fw-bold display-4"><?php echo format_price_indian($prop['price']); ?></h2>
             
             <div class="d-flex justify-content-center gap-4 mt-5 text-white">
@@ -206,21 +206,22 @@ if (isset($_GET['id'])) {
                         <p class="mb-0 small opacity-75">Direct access to sales team</p>
                     </div>
                     <div class="contact-body">
-                        <form>
+                        <form action="forms/submit_enquiry.php" method="POST">
+                            <input type="hidden" name="property_id" value="<?= htmlspecialchars($prop_id) ?>">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingName" placeholder="Name">
+                                <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" required>
                                 <label for="floatingName">Your Name</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                                <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com" required>
                                 <label for="floatingEmail">Email Address</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" id="floatingPhone" placeholder="Phone">
+                                <input type="tel" class="form-control" name="phone" id="floatingPhone" placeholder="Phone" required>
                                 <label for="floatingPhone">Phone Number</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingText" style="height: 100px"></textarea>
+                                <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingText" style="height: 100px"></textarea>
                                 <label for="floatingText">Message</label>
                             </div>
                             <button type="submit" class="btn btn-gold w-100 py-3 fw-bold shadow-lg">

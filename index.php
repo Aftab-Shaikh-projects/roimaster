@@ -48,12 +48,7 @@
 
                     <div class="col-md-3">
                         <label class="form-label"><i class="fa-regular fa-map me-2"></i>Sub Location</label>
-                        <select class="form-select" name="sub_location">
-                            <option selected disabled>Area</option>
-                            <option value="bandra">Bandra West</option>
-                            <option value="andheri">Andheri East</option>
-                            <option value="vashi">Vashi</option>
-                        </select>
+                        <input type="text" class="form-control" name="sub_location" placeholder="e.g. Bandra West">
                     </div>
 
                     <div class="col-md-3">

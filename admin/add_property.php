@@ -91,8 +91,6 @@ if (isset($_GET["id"])) {
                   value="<?= isset($prop) ? htmlspecialchars($prop['sub_location']) : '' ?>" placeholder="e.g. Bandra West" required>
               </div>
               
-              <!-- Hidden Location Field for Backward Compatibility if needed, or we construct it on save -->
-              <input type="hidden" name="location" value="<?= isset($prop) ? htmlspecialchars($prop['location']) : '' ?>">
             </div>
           </div>
 

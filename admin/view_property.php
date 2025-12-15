@@ -38,7 +38,7 @@ $gal_res = mysqli_query($conn, $gal_sql);
                 ?>
                 <img src="<?= $img_src ?>" class="img-fluid rounded-3 mb-3 w-100" style="height: 200px; object-fit: cover;" alt="Main Image">
                 <h4 class="fw-bold mb-1"><?= $prop['title'] ?></h4>
-                <p class="text-muted mb-3"><i class="bx bx-map"></i> <?= $prop['location'] ?></p>
+                <p class="text-muted mb-3"><i class="bx bx-map"></i> <?= ucwords($prop['sub_location']) . ', ' . ucwords($prop['city']) ?></p>
                 
                 <hr>
                 

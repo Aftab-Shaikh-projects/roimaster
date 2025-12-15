@@ -340,6 +340,42 @@
 <a href="https://wa.me/917208565700" class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
+
+<!-- Global SweetAlert2 Handler -->
+<?php
+if(isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    $icon = $alert['type']; // success, error, warning, info
+    $title = $alert['title'];
+    $text = $alert['message'];
+    
+    // Custom Gold/Premium Styling for SweetAlert
+    echo "<script>
+    Swal.fire({
+        icon: '$icon',
+        title: '$title',
+        text: '$text',
+        confirmButtonColor: '#C5A47E', // Gold Primary
+        background: '#fff',
+        color: '#06142E',
+        iconColor: '$icon' == 'success' ? '#C5A47E' : '',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        },
+        customClass: {
+            popup: 'rounded-4 shadow-lg',
+            confirmButton: 'px-4 py-2 rounded-3 fw-bold'
+        }
+    });
+    </script>";
+    
+    // Clear Alert
+    unset($_SESSION['alert']);
+}
+?>
 </body>
 
 </html>

@@ -27,7 +27,7 @@ $prop_res = mysqli_query($conn, $prop_sql);
                         <span class="price-tag-modern"><?= format_price_indian($row['price']) ?></span>
                         <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
                         <p class="text-muted mb-4"><i class="fa-solid fa-location-dot me-2"
-                                style="color: var(--accent-rich);"></i><?= htmlspecialchars($row['location']) ?></p>
+                                style="color: var(--accent-rich);"></i><?= htmlspecialchars(ucwords($row['sub_location']) . ', ' . ucwords($row['city'])) ?></p>
 
                         <div class="prop-features-modern">
                             <span><i class="fa-solid fa-bed me-2"></i> <?= htmlspecialchars($row['bhk']) ?></span>
