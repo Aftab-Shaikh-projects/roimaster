@@ -146,12 +146,17 @@ if (isset($_GET["id"])) {
                 <label for="image" class="form-label">Main Image <span class="text-danger">*</span></label>
                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
                 
-                <?php if (isset($prop) && !empty($prop['image'])): ?>
+                <?php if (isset($prop) && !empty($prop['image'])): 
+                    $img_src = $prop['image'];
+                    if (!filter_var($img_src, FILTER_VALIDATE_URL)) {
+                        $img_src = "../" . $img_src; 
+                    }
+                ?>
                     <div class="mt-2">
                         <small class="text-muted">Current Image:</small>
                         <div class="d-flex align-items-center mt-1">
-                            <img src="<?= $prop['image'] ?>" alt="Current" class="rounded shadow-sm" style="width: 100px; height: 60px; object-fit: cover;">
-                            <span class="ms-2 text-muted small text-break"><?= $prop['image'] ?></span>
+                            <img src="<?= $img_src ?>" alt="Current" class="rounded shadow-sm" style="width: 100px; height: 60px; object-fit: cover;">
+                            <span class="ms-2 text-muted small text-break"><?= htmlspecialchars($prop['image']) ?></span>
                         </div>
                     </div>
                 <?php else: ?>
