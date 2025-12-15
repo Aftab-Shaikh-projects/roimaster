@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include __DIR__ . '/../includes/db_connect.php';
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,6 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
     <!-- Three.js only in head -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

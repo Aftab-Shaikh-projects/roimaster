@@ -1,51 +1,42 @@
 <?php include 'layouts/header.php'; ?>
 
 <?php
-// Mock Database
-$properties = [
-    'nahar-amaryllis' => [
-        'title' => 'Nahar Amaryllis',
-        'price' => '₹ 1.17 Cr',
-        'location' => 'Chandivali, Powai, Mumbai',
-        'bhk' => '1 BHK',
-        'area' => '366 Sqft',
-        'type' => 'Residential',
-        'possession' => 'June 2024',
-        'image' => 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000&auto=format&fit=crop',
-        'description' => 'Nahar Amaryllis Chandivali is a flagship project by Nahar Group. Situated in the most premium location of Powai, Mumbai, it offers 1, 2 & 3 Bed Apartments. The project features world-class amenities including an Open Air Cafeteria, Multipurpose Court, Gymnasium, Yoga/Meditation Zone, and a lush Landscape Garden.',
-        'features' => ['Air Conditioning', 'Gymnasium', 'Landscape Garden', 'Jogging Track', 'Children\'s Play Area', 'High Speed Elevators'],
-        'map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.645932826362!2d72.8988!3d19.1182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA3JzA1LjUiTiA3MsKwNTMnNTUuNyJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin'
-    ],
-    'kanakia-silicon-valley' => [
-        'title' => 'Kanakia Silicon Valley',
-        'price' => '₹ 2.70 Cr',
-        'location' => 'Powai, Mumbai',
-        'bhk' => '2 BHK',
-        'area' => '669 Sqft',
-        'type' => 'Residential',
-        'possession' => 'June 2024',
-        'image' => 'https://images.unsplash.com/photo-1600596542815-6ad4c7213aa8?q=80&w=1000&auto=format&fit=crop',
-        'description' => 'Kanakia Silicon Valley is a tremendous advancement in culture, technology, and the environment. Spanning around 8 acres, it launches Go Zero 2 & 3 Bed Lake Facing apartments. Its hilltop location in the center of Mumbai’s most coveted neighborhood, Powai, offers breathtaking views.',
-        'features' => ['Lake View', 'Swimming Pool', 'Clubhouse', 'Smart Home Automation', 'Valet Parking', '24/7 Security'],
-        'map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.3562!2d72.90!3d19.12!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA3JzEyLjAiTiA3MsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin'
-    ],
-    'godrej-urban-park' => [
-        'title' => 'Godrej Urban Park',
-        'price' => '₹ 3.25 Cr',
-        'location' => 'Chandivali, Mumbai',
-        'bhk' => '3 BHK',
-        'area' => '975 Sqft',
-        'type' => 'Residential',
-        'possession' => 'Ready to Move',
-        'image' => 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000&auto=format&fit=crop',
-        'description' => 'Godrej Urban Park in Chandivali brings you a home with a 5-point landscape advantage. Experience a life surrounded by greenery with a Miyawaki forest, rooftop gardens, and a vehicle-free podium. It offers a perfect blend of nature and modern luxury living.',
-        'features' => ['Miyawaki Forest', 'Rooftop Garden', 'Swimming Pool', 'Squash Court', 'Mini Theatre', 'Co-working Space'],
-        'map_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.5!2d72.9!3d19.115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzU0LjAiTiA3MsKwNTQnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin'
-    ]
-];
+// Database Connection (db_connect.php included in header)
 
-$id = isset($_GET['id']) ? $_GET['id'] : 'nahar-amaryllis'; // Default
-$prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amaryllis'];
+if (isset($_GET['id'])) {
+    $enc_id = $_GET['id'];
+    $prop_id = dec($enc_id); // Double Base64 Decode
+    $prop_id = res($prop_id); // Sanitize
+
+    // Fetch Property
+    $sql = "SELECT * FROM `properties` WHERE `id` = '$prop_id' AND `active`='Y'";
+    $res = mysqli_query($conn, $sql);
+    
+    if (mysqli_num_rows($res) > 0) {
+        $prop = mysqli_fetch_assoc($res);
+        
+        // Fetch Gallery
+        $gal_sql = "SELECT * FROM `property_gallery` WHERE `property_id` = '$prop_id' ORDER BY `id` ASC";
+        $gal_res = mysqli_query($conn, $gal_sql);
+        $gallery_images = [];
+        // Add Main Image First as requested
+        if (!empty($prop['image'])) {
+            $gallery_images[] = $prop['image'];
+        }
+        while($g = mysqli_fetch_assoc($gal_res)) {
+            $gallery_images[] = $g['image_path'];
+        }
+        $total_images = count($gallery_images);
+        
+    } else {
+        // Not Found
+        echo "<script>window.location.href='properties.php';</script>";
+        exit;
+    }
+} else {
+    echo "<script>window.location.href='properties.php';</script>";
+    exit;
+}
 ?>
 
 <!-- Hero Section -->
@@ -56,9 +47,9 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
     <div class="container position-relative z-2 text-center" data-aos="zoom-in" data-aos-duration="1000">
         <div class="glass-hero-card p-5 d-inline-block mx-auto">
             <span class="badge bg-gold text-dark mb-4 px-4 py-2 fw-bold text-uppercase tracking-wider">For Sale</span>
-            <h1 class="display-2 fw-bold text-white mb-2" style="font-family: 'Playfair Display', serif;"><?php echo $prop['title']; ?></h1>
-            <p class="lead text-white-80 mb-4 fs-4"><i class="fa-solid fa-location-dot me-2 text-gold"></i><?php echo $prop['location']; ?></p>
-            <h2 class="text-gold fw-bold display-4"><?php echo $prop['price']; ?></h2>
+            <h1 class="display-2 fw-bold text-white mb-2" style="font-family: 'Playfair Display', serif;"><?php echo htmlspecialchars($prop['title']); ?></h1>
+            <p class="lead text-white-80 mb-4 fs-4"><i class="fa-solid fa-location-dot me-2 text-gold"></i><?php echo htmlspecialchars($prop['location']); ?></p>
+            <h2 class="text-gold fw-bold display-4"><?php echo format_price_indian($prop['price']); ?></h2>
             
             <div class="d-flex justify-content-center gap-4 mt-5 text-white">
                 <div class="stat-bubble">
@@ -96,54 +87,105 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
         <div class="row g-5">
             <!-- Left Content -->
             <div class="col-lg-8">
-                <!-- Gallery Section (New) -->
+                <!-- Gallery Section (Refined) -->
+                <?php if ($total_images > 0): ?>
                 <div class="mb-5" data-aos="fade-up">
                     <h3 class="fw-bold mb-4 text-primary-deep section-heading">Property Gallery</h3>
-                    <div class="row g-3">
-                        <div class="col-md-8">
-                            <div class="gallery-item h-100">
-                                <img src="<?php echo $prop['image']; ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Main View">
+                    
+                    <?php if ($total_images >= 3): ?>
+                        <!-- Creative Grid (1 Big, 2 Small) -->
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <a href="<?= $gallery_images[0] ?>" data-fancybox="gallery" class="gallery-item h-100 d-block">
+                                    <img src="<?= $gallery_images[0] ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Main View">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex flex-column gap-3 h-100">
+                                    <!-- Image 2 -->
+                                    <a href="<?= $gallery_images[1] ?>" data-fancybox="gallery" class="gallery-item h-50 d-block">
+                                        <img src="<?= $gallery_images[1] ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Gallery 2">
+                                    </a>
+                                    
+                                    <!-- Image 3 (With possible overlay) -->
+                                    <?php 
+                                        $remaining = $total_images - 3; 
+                                        $has_more = $remaining > 0;
+                                    ?>
+                                    <a href="<?= $gallery_images[2] ?>" data-fancybox="gallery" class="gallery-item h-50 d-block position-relative">
+                                        <img src="<?= $gallery_images[2] ?>" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Gallery 3">
+                                        <?php if ($has_more): ?>
+                                        <div class="gallery-overlay d-flex align-items-center justify-content-center">
+                                            <span class="fw-bold text-white fs-5">+<?= $remaining ?> Photos</span>
+                                        </div>
+                                        <?php endif; ?>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="d-flex flex-column gap-3 h-100">
-                                <div class="gallery-item h-50">
-                                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600&auto=format&fit=crop" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Interior">
-                                </div>
-                                <div class="gallery-item h-50 position-relative">
-                                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=600&auto=format&fit=crop" class="img-fluid rounded-3 h-100 w-100 object-fit-cover" alt="Detail">
-                                    <div class="gallery-overlay d-flex align-items-center justify-content-center">
-                                        <span class="fw-bold text-white">+5 Photos</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        
+                        <!-- Hidden links for remaining images to show in Fancybox -->
+                        <?php for($i = 3; $i < $total_images; $i++): ?>
+                            <a href="<?= $gallery_images[$i] ?>" data-fancybox="gallery" class="d-none"></a>
+                        <?php endfor; ?>
 
+                    <?php else: ?>
+                        <!-- Simple Grid (< 3 images) -->
+                        <div class="row g-3">
+                            <?php foreach($gallery_images as $img): ?>
+                            <div class="col-md-6">
+                                <a href="<?= $img ?>" data-fancybox="gallery" class="gallery-item h-100 d-block">
+                                    <img src="<?= $img ?>" class="img-fluid rounded-3 w-100 object-fit-cover" style="height: 300px;" alt="Gallery">
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+
+                <?php if (!empty($prop['description'])): ?>
                 <div class="mb-5" data-aos="fade-up">
                     <h3 class="fw-bold mb-4 text-primary-deep section-heading">About the Property</h3>
                     <div class="p-4 bg-light-gold rounded-4 border-gold-light">
-                        <p class="text-muted leading-relaxed fs-5 mb-0" style="text-align: justify;"><?php echo $prop['description']; ?></p>
+                        <p class="text-muted leading-relaxed fs-5 mb-0" style="text-align: justify;"><?php echo htmlspecialchars($prop['description']); ?></p>
                     </div>
                 </div>
+                <?php endif; ?>
 
+                <?php 
+                $has_features = false;
+                if (!empty($prop['features'])) {
+                   $feats_check = explode(',', $prop['features']);
+                   foreach($feats_check as $f) {
+                       if(!empty(trim($f))) { $has_features = true; break; }
+                   }
+                }
+                
+                if ($has_features): ?>
                 <div class="mb-5" data-aos="fade-up">
                     <h3 class="fw-bold mb-4 text-primary-deep section-heading">Premium Amenities</h3>
                     <div class="row g-3">
-                        <?php foreach($prop['features'] as $feature): ?>
+                        <?php 
+                        $feats = explode(',', $prop['features']);
+                        foreach($feats as $feature): 
+                            $feature = trim($feature);
+                            if(empty($feature)) continue;
+                        ?>
                         <div class="col-md-4 col-6">
                             <div class="amenity-card-premium text-center p-4">
                                 <div class="icon-circle mb-3 mx-auto">
                                     <i class="fa-solid fa-star text-gold"></i>
                                 </div>
-                                <span class="fw-bold text-dark small text-uppercase"><?php echo $feature; ?></span>
+                                <span class="fw-bold text-dark small text-uppercase"><?php echo htmlspecialchars($feature); ?></span>
                             </div>
                         </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
+                <?php endif; ?>
                 
+                <?php if (!empty($prop['map_url'])): ?>
                  <div class="mb-5" data-aos="fade-up">
                     <h3 class="fw-bold mb-4 text-primary-deep section-heading">Location</h3>
                     <div class="map-frame p-2 bg-white shadow-sm rounded-4">
@@ -152,6 +194,7 @@ $prop = isset($properties[$id]) ? $properties[$id] : $properties['nahar-amarylli
                         </div>
                     </div>
                 </div>
+                <?php endif; ?>
 
             </div>
 
