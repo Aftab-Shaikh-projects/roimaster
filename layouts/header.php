@@ -871,6 +871,19 @@ include __DIR__ . '/../includes/db_connect.php';
                 text-align: center;
             }
         }
+
+        /* Remove Brand Hover Effect */
+        .navbar-brand:hover {
+            color: #fff !important;
+        }
+        .navbar.scrolled .navbar-brand:hover {
+            color: var(--primary-deep) !important;
+        }
+
+        /* Fix Burger Icon Visibility on White Background */
+        .navbar.scrolled .navbar-toggler-icon {
+            filter: invert(1);
+        }
     </style>
 </head>
 
