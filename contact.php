@@ -273,37 +273,37 @@
                         <h3 class="fw-bold mb-4 font-heading" style="color: var(--primary-deep);">Send a Message</h3>
                         <p class="text-muted mb-5">Interested in a property? Fill out the form below and our relationship manager will contact you shortly.</p>
                         
-                        <form action="#" method="POST">
+                        <form action="forms/submit_contact.php" method="POST">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="form-label-custom">Your Name</label>
-                                    <input type="text" class="form-control-custom" placeholder="John Doe" required>
+                                    <input type="text" name="name" class="form-control-custom" placeholder="John Doe" required>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="form-label-custom">Phone Number</label>
-                                    <input type="tel" class="form-control-custom" placeholder="+91 98765 43210" required>
+                                    <input type="tel" name="phone" class="form-control-custom" placeholder="+91 98765 43210" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="form-label-custom">Email Address</label>
-                                    <input type="email" class="form-control-custom" placeholder="john@example.com" required>
+                                    <input type="email" name="email" class="form-control-custom" placeholder="john@example.com" required>
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="form-label-custom">Interested In</label>
-                                    <select class="form-control-custom text-muted">
-                                        <option>Buying Property</option>
-                                        <option>Selling Property</option>
-                                        <option>Investment Advisory</option>
-                                        <option>Lucknow Projects</option>
+                                    <select name="subject" class="form-control-custom text-muted">
+                                        <option value="Buying Property">Buying Property</option>
+                                        <option value="Selling Property">Selling Property</option>
+                                        <option value="Investment Advisory">Investment Advisory</option>
+                                        <option value="Lucknow Projects">Lucknow Projects</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group mt-3">
                                 <label class="form-label-custom">Your Message</label>
-                                <textarea class="form-control-custom" rows="4" placeholder="Tell us about your requirements..."></textarea>
+                                <textarea name="message" class="form-control-custom" rows="4" placeholder="Tell us about your requirements..."></textarea>
                             </div>
 
                             <button type="submit" class="btn btn-submit">

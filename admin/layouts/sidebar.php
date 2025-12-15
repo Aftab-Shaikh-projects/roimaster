@@ -39,6 +39,12 @@
         <div>Enquiries</div>
       </a>
     </li>
+    <li class="menu-item">
+      <a href="contact_messages.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-envelope"></i>
+        <div>Contact Messages</div>
+      </a>
+    </li>
 
     <!-- Logout (Optional but good to have explicit) -->
     <li class="menu-item">
