@@ -22,7 +22,7 @@
     <div class="hero-content">
         <div class="text-center" data-aos="zoom-out-up">
             <h1 class="hero-title gs-reveal">Curating Wealth Through<br>Real Estate</h1>
-            <p class="hero-subtitle gs-reveal">Exclusive properties vetted for exceptional Return on Investment.</p>
+            <p class="hero-subtitle gs-reveal">Making Your Real Estate Investments Easy!.</p>
         </div>
 
         <div class="filter-container gs-reveal">
