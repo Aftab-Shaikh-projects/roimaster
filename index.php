@@ -71,7 +71,9 @@
                         <label class="form-label"><i class="fa-solid fa-building me-2"></i>Asset Type</label>
                         <select class="form-select" id="propertyType" name="type" onchange="toggleConfig()">
                             <option value="residential" selected>Residential</option>
+                            <option value="villa">Villa</option>
                             <option value="commercial">Commercial</option>
+                            <option value="plot">Plots</option>
                         </select>
                     </div>
 

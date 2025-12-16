@@ -235,12 +235,22 @@
                 $type = mysqli_real_escape_string($conn, $_GET['type']);
                 
                 if($type == 'residential') {
-                     $where[] = "(`type` = 'Residential' OR `type` = 'Villa' OR `type` = 'Plot')"; 
+                     $where[] = "`type` = 'Residential'"; 
                      if(isset($_GET['bhk_config']) && !empty($_GET['bhk_config'])) {
                          $bhk = mysqli_real_escape_string($conn, $_GET['bhk_config']);
                          $where[] = "`bhk` LIKE '%$bhk%'";
                      }
                 } 
+                elseif($type == 'villa') {
+                     $where[] = "`type` = 'Villa'"; 
+                     if(isset($_GET['bhk_config']) && !empty($_GET['bhk_config'])) {
+                         $bhk = mysqli_real_escape_string($conn, $_GET['bhk_config']);
+                         $where[] = "`bhk` LIKE '%$bhk%'";
+                     }
+                }
+                elseif($type == 'plot') {
+                     $where[] = "`type` = 'Plot'"; 
+                }
                 elseif($type == 'commercial') {
                     $where[] = "`type` = 'Commercial'";
                     if(isset($_GET['comm_config']) && !empty($_GET['comm_config'])) {
@@ -370,7 +380,9 @@
                             <label class="form-label">Asset Type</label>
                             <select class="form-select" id="propertyTypeById" name="type" onchange="toggleConfigById()">
                                 <option value="residential" <?= (isset($_GET['type']) && $_GET['type'] == 'residential') ? 'selected' : '' ?>>Residential</option>
+                                <option value="villa" <?= (isset($_GET['type']) && $_GET['type'] == 'villa') ? 'selected' : '' ?>>Villa</option>
                                 <option value="commercial" <?= (isset($_GET['type']) && $_GET['type'] == 'commercial') ? 'selected' : '' ?>>Commercial</option>
+                                <option value="plot" <?= (isset($_GET['type']) && $_GET['type'] == 'plot') ? 'selected' : '' ?>>Plots</option>
                             </select>
                         </div>
 
@@ -420,7 +432,11 @@
         if(type === 'commercial') {
             resOpts.style.display = 'none';
             commOpts.style.display = 'block';
+        } else if (type === 'plot') {
+            resOpts.style.display = 'none';
+            commOpts.style.display = 'none';
         } else {
+            // Residential or Villa or Default
             resOpts.style.display = 'block';
             commOpts.style.display = 'none';
         }

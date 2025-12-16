@@ -317,7 +317,7 @@
         }
     });
 
-    // Filter Logic Script (Kept exactly the same)
+    // Filter Logic Script
     function toggleConfig() {
         var typeSelect = document.getElementById("propertyType");
         var selectedValue = typeSelect.value;
@@ -325,12 +325,16 @@
         var resOptions = document.getElementById("residentialOptions");
         var commOptions = document.getElementById("commercialOptions");
 
-        if (selectedValue === "residential") {
+        if (selectedValue === "residential" || selectedValue === "villa") {
             resOptions.style.display = "block";
             commOptions.style.display = "none";
         } else if (selectedValue === "commercial") {
             resOptions.style.display = "none";
             commOptions.style.display = "block";
+        } else {
+            // Plots or others
+            resOptions.style.display = "none";
+            commOptions.style.display = "none";
         }
     }
 </script>
