@@ -910,7 +910,7 @@ include __DIR__ . '/../includes/db_connect.php';
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#" data-aos="fade-down">
+            <a class="navbar-brand" href="index" data-aos="fade-down">
                 <i class="fa-solid fa-building-columns me-2"></i>ROI<span>MASTER</span>
             </a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"

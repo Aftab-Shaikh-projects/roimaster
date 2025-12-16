@@ -241,10 +241,10 @@
             <div class="col-lg-6 ps-lg-5" data-aos="fade-left">
                 <div class="leader-content">
                     <span class="leader-title">FOUNDER & CEO</span>
-                    <h2 class="leader-name">Mr. Sameer Khan</h2>
+                    <h2 class="leader-name">Mr. Brajesh Verma</h2>
                     <p class="leader-bio">
                         "Transparency is the new currency of luxury." <br><br>
-                        With 15 years in Mumbai & UAE real estate, Sameer founded ROIMaster to eliminate ambiguity from high-value transactions. His data-centric approach has helped 500+ families build generational wealth.
+                        With 15 years in Mumbai & UAE real estate, Brajesh founded ROIMaster to eliminate ambiguity from high-value transactions. His data-centric approach has helped 500+ families build generational wealth.
                     </p>
                     <!-- <div class="d-flex align-items-center">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Signature_sample.svg" class="signature-img" alt="Signature">
@@ -258,10 +258,10 @@
             <div class="col-lg-6 pe-lg-5 order-2 order-lg-1" data-aos="fade-right">
                 <div class="leader-content text-lg-end text-start">
                     <span class="leader-title">CO-FOUNDER & MD</span>
-                    <h2 class="leader-name">Mrs. Priya Sharma</h2>
+                    <h2 class="leader-name">Mrs. Monalisa Verma</h2>
                     <p class="leader-bio">
                         "We don't just sell properties; we curate lifestyles." <br><br>
-                        Leading our expansion into Lucknow and managing client experiences, Priya ensures the "No Compromise" philosophy is embedded in every deal. She bridges the gap between modern investment needs and traditional values.
+                        Leading our expansion into Lucknow and managing client experiences, Monalisa ensures the "No Compromise" philosophy is embedded in every deal. She bridges the gap between modern investment needs and traditional values.
                     </p>
                     <!-- <div class="d-flex align-items-center justify-content-lg-end justify-content-start">
                         <a href="#" class="text-gold me-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
