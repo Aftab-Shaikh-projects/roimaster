@@ -157,4 +157,297 @@
         </div>
     </div>
 </section>
+<?php include 'components/ourimpact.php'; ?>
+
+<!-- TESTIMONIALS SECTION -->
+<style>
+    /* --- Premium Dark Testimonial Styles --- */
+    .testimonial-section {
+        position: relative;
+        overflow: hidden;
+        padding-bottom: 100px !important;
+        padding-top: 100px !important;
+        background-color: var(--primary-deep); /* Dark Navy Background */
+        color: #fff;
+    }
+
+    /* Background Pattern Overlay */
+    .testimonial-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .testimonial-wrapper {
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        padding: 40px 0;
+    }
+
+    .testimonial-track {
+        display: flex;
+        gap: 40px; /* Increased gap for elegance */
+        width: max-content;
+        padding: 0 20px;
+    }
+
+    .testimonial-card {
+        width: 450px; /* Slightly wider cards */
+        background: linear-gradient(145deg, #0b2247, #06142e); /* Deep gradient */
+        border: 1px solid rgba(197, 164, 126, 0.2); /* Subtle Gold Border */
+        border-radius: 15px; /* Softer radius */
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    /* Hover Effect */
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--accent-rich); /* Bright Gold on Hover */
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(197, 164, 126, 0.1); /* Glow */
+    }
+
+    /* Large decorative quote mark */
+    .testimonial-card::after {
+        content: '\201C'; /* Unicode Left Double Quote */
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 8rem;
+        font-family: 'Times New Roman', serif;
+        color: var(--accent-rich);
+        opacity: 0.05;
+        line-height: 1;
+        pointer-events: none;
+    }
+
+    .client-profile {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Divider */
+        padding-bottom: 20px;
+    }
+
+    .client-img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+        border: 2px solid var(--accent-rich);
+        padding: 3px; /* Gap between border and image */
+        background: transparent;
+    }
+
+    .client-info h5 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        color: #fff;
+        margin: 0 0 5px 0;
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .client-info span {
+        font-size: 0.85rem;
+        color: var(--accent-rich); /* Gold Text */
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+
+    .testimonial-text {
+        font-family: 'Poppins', sans-serif; /* Clean sans-serif feels more modern premium */
+        font-size: 1.05rem;
+        color: #d1d1d1; /* Soft white/grey */
+        font-weight: 300;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        flex-grow: 1;
+        position: relative;
+        z-index: 1;
+    }
+
+    .rating {
+        color: var(--accent-rich); /* Gold Stars */
+        font-size: 0.9rem;
+        display: flex;
+        gap: 5px;
+    }
+    
+    /* Section Header Overrides for Dark Mode */
+    .testimonial-section .section-title {
+        color: #fff;
+    }
+    
+    .testimonial-section .section-title::after {
+        background: var(--accent-rich);
+    }
+    
+    .testimonial-section .section-subtitle {
+        color: var(--accent-light);
+        opacity: 0.8;
+    }
+
+    /* Gradient Masks */
+    .testimonial-section .mask-left,
+    .testimonial-section .mask-right {
+        position: absolute;
+        top: 0;
+        width: 200px;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+    }
+    
+    .testimonial-section .mask-left {
+        left: 0;
+        background: linear-gradient(to right, var(--primary-deep), transparent);
+    }
+    
+    .testimonial-section .mask-right {
+        right: 0;
+        background: linear-gradient(to left, var(--primary-deep), transparent);
+    }
+</style>
+
+<section class="testimonial-section">
+    <!-- Gradient Masks -->
+    <div class="mask-left"></div>
+    <div class="mask-right"></div>
+
+    <div class="container container-full-width"> 
+        <div class="section-header text-center" data-aos="fade-up">
+            <h2 class="section-title">Trusted by the Elite</h2>
+            <p class="section-subtitle mx-auto">Join a community of sophisticated investors creating generational wealth.</p>
+        </div>
+    </div>
+
+    <!-- Mark the wrapper for the slider -->
+    <div class="testimonial-wrapper">
+        <div class="testimonial-track">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="client-img">
+                    <div class="client-info">
+                        <h5>Rajesh Mehta</h5>
+                        <span>Real Estate Magnate</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"ROIMaster isn't just a platform; it's a strategic partner. Their insights into commercial real estate helped me optimize my portfolio for maximum yield. Exceptional service."</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="client-img">
+                    <div class="client-info">
+                        <h5>Sneha Kapoor</h5>
+                        <span>Investment Banker</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"I value time and transparency above all. ROIMaster delivers both. The pre-leased assets they presented were fully vetted, making my decision-making process effortless."</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+             <!-- Testimonial 3 -->
+             <div class="testimonial-card">
+                <div class="client-profile">
+                    <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Client" class="client-img">
+                    <div class="client-info">
+                        <h5>Ankit Sharma</h5>
+                        <span>Tech Entrepreneur</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Diversifying into real estate was a goal, but I lacked the expertise. ROIMaster's advisory team bridged that gap perfectly. I'm now seeing consistent 8% rental yields."</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="client-img">
+                    <div class="client-info">
+                        <h5>Dr. Priya Reddy</h5>
+                        <span>Chief Surgeon</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"A truly 'Private Banking' experience for real estate. The team understands the requirements of HNI clients—confidentiality, quality, and speed."</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+            
+             <!-- Testimonial 5 -->
+             <div class="testimonial-card">
+                <div class="client-profile">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Client" class="client-img">
+                    <div class="client-info">
+                        <h5>Vikram Singh</h5>
+                        <span>Senior Architect</span>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The curation is impeccable. As an architect, I am critical of construction quality, but ROIMaster's listed properties consistently meet the highest standards."</p>
+                <div class="rating">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Register GSAP Plugin if needed (not needed for basic tweens, but good practice if using ScrollTrigger etc later)
+        // gsap.registerPlugin(ScrollTrigger); 
+
+        const track = document.querySelector(".testimonial-track");
+        const cards = document.querySelectorAll(".testimonial-card");
+        
+        // Clone cards for seamless loop
+        cards.forEach(card => {
+            let clone = card.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        // Calculate total width
+        // A simple way is to animate xPercent
+        
+        gsap.to(track, {
+            xPercent: -50, // Move 50% because we doubled the content
+            ease: "none",
+            duration: 40, // Adjust speed
+            repeat: -1
+        });
+        
+        // Pause on hover
+        const wrapper = document.querySelector(".testimonial-wrapper");
+        wrapper.addEventListener("mouseenter", () => gsap.globalTimeline.timeScale(0));
+        wrapper.addEventListener("mouseleave", () => gsap.globalTimeline.timeScale(1));
+    });
+</script>
+
 <?php include 'layouts/footer.php'; ?>

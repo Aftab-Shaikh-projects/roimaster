@@ -923,6 +923,8 @@ include __DIR__ . '/../includes/db_connect.php';
                     </li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="about">About
                             Us</a></li>
+                            <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="team">Our Team</a></li>
+                            
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="300"><a class="nav-link"
                             href="properties">Properties</a></li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
