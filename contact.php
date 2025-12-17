@@ -360,7 +360,7 @@
                     <div class="col-lg-4 mb-4">
                         <h3 class="fw-bold" style="color: var(--primary-deep);">Frequently<br>Asked Questions</h3>
                         <p class="text-muted">Can't find the answer you're looking for? Reach out to our support team directly.</p>
-                        <a href="https://wa.me/917208565700" class="text-decoration-none fw-bold" style="color: var(--accent-rich);">Chat on WhatsApp <i class="fa-brands fa-whatsapp ms-1"></i></a>
+                        <a href="https://wa.me/917208565700" class="text-decoration-none fw-bold" style="color: var(--accent-rich);">Talk to the Expert !  <i class="fa-brands fa-whatsapp ms-1"></i></a>
                     </div>
                     <div class="col-lg-8">
                         <div class="row">

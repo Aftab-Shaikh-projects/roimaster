@@ -243,13 +243,9 @@
                     <span class="leader-title">FOUNDER & CEO</span>
                     <h2 class="leader-name">Mr. Brajesh Verma</h2>
                     <p class="leader-bio">
-                        "Transparency is the new currency of luxury." <br><br>
-                        With 15 years in Mumbai & UAE real estate, Brajesh founded ROIMaster to eliminate ambiguity from high-value transactions. His data-centric approach has helped 500+ families build generational wealth.
+                        Holding 15+ Year of Experience into Hospitality, Real Estate & Corporate Sales. Brajesh Verma has already developed 2 Successfull venturs. Getting his Simple Vision into Reality that "Everyone Can Invest in Real Estate". Simplifying & Making Your Real Estate Investments Super Easy, hassle free with all Legal Clarity so that Everyone Can Get an Excellent ROI with the safest Investment on the Earth.
                     </p>
-                    <!-- <div class="d-flex align-items-center">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Signature_sample.svg" class="signature-img" alt="Signature">
-                        <a href="#" class="text-gold ms-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>
@@ -260,18 +256,14 @@
                     <span class="leader-title">CO-FOUNDER & MD</span>
                     <h2 class="leader-name">Mrs. Monalisa Verma</h2>
                     <p class="leader-bio">
-                        "We don't just sell properties; we curate lifestyles." <br><br>
-                        Leading our expansion into Lucknow and managing client experiences, Monalisa ensures the "No Compromise" philosophy is embedded in every deal. She bridges the gap between modern investment needs and traditional values.
+                        An Electronic Engineer & A Hospitality Professional, Holding Excellent Experience with one of the Top Airline in the world. Already developed a successful brand Called "Lilac- Nail Studio By Monalisa", Aiming for making it no.1 Brand in India soon. She Takes care of Operations & Training Make ROI Master more Powerful brand into Real Estate.
                     </p>
-                    <!-- <div class="d-flex align-items-center justify-content-lg-end justify-content-start">
-                        <a href="#" class="text-gold me-4"><i class="fa-brands fa-linkedin fa-xl"></i></a>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Signature_sample.svg" class="signature-img" alt="Signature">
-                    </div> -->
+                   
                 </div>
             </div>
             <div class="col-lg-6 mb-4 mb-lg-0 img-right order-1 order-lg-2" data-aos="fade-left">
                 <div class="leader-image-container d-flex justify-content-lg-end justify-content-start">
-                    <img src="assets\photo\mainphoto.jpeg" class="leader-img" alt="Priya Sharma">
+                    <img src="assets\photo\photo3.jpg" class="leader-img" alt="Priya Sharma">
                 </div>
             </div>
         </div>

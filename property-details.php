@@ -222,7 +222,7 @@ $hero_is_video = in_array($ext, ['mp4', 'webm']);
             <div class="col-lg-4">
                 <div class="contact-card sticky-top" style="top: 100px;">
                     <div class="contact-header">
-                        <h4 class="fw-bold mb-1" style="font-family: 'Playfair Display', serif;">VIP Inquiry</h4>
+                        <h4 class="fw-bold mb-1" style="font-family: 'Playfair Display', serif;">Schedule a Site Visit / Video Presentation!</h4>
                         <p class="mb-0 small opacity-75">Direct access to sales team</p>
                     </div>
                     <div class="contact-body">
