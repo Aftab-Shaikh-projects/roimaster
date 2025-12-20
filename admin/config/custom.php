@@ -751,7 +751,7 @@ if (isset($_FILES)) {
         foreach ($value as $k => $v) {
           $filename = $value["name"];
           foreach ($filename as $nk => $nv) {
-            if ($value["type"][$nk] != "" && $value["type"][$nk] != "image/png" && $value["type"][$nk] != "image/jpeg" && $value["type"][$nk] != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" && $value["type"][$nk] != "application/vnd.openxmlformats-officedocument.presentationml.presentation" && $value["type"][$nk] != "application/pdf" && $value["type"][$nk] != "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && $value["type"][$nk] != "video/mp4") {
+            if ($value["type"][$nk] != "" && $value["type"][$nk] != "image/png" && $value["type"][$nk] != "image/webp" && $value["type"][$nk] != "image/jpeg" && $value["type"][$nk] != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" && $value["type"][$nk] != "application/vnd.openxmlformats-officedocument.presentationml.presentation" && $value["type"][$nk] != "application/pdf" && $value["type"][$nk] != "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && $value["type"][$nk] != "video/mp4") {
 
               if ("https://192.168.1.113" . $_SERVER["REQUEST_URI"] == $_SERVER["HTTP_REFERER"]) {
                 echo '<div style="display:flex;width:auto;">
@@ -772,7 +772,7 @@ if (isset($_FILES)) {
             // }
           }
         }
-      } elseif ($value["type"] != "" && $value["type"] != "image/png" && $value["type"] != "image/jpeg" && $value["type"] != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" && $value["type"] != "application/vnd.openxmlformats-officedocument.presentationml.presentation" && $value["type"] != "application/pdf" && $value["type"] != "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && $value["type"] != "video/mp4") {
+      } elseif ($value["type"] != "" && $value["type"] != "image/png" && $value["type"] != "image/webp" && $value["type"] != "image/jpeg" && $value["type"] != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" && $value["type"] != "application/vnd.openxmlformats-officedocument.presentationml.presentation" && $value["type"] != "application/pdf" && $value["type"] != "application/vnd.openxmlformats-officedocument.wordprocessingml.document" && $value["type"] != "video/mp4") {
 
         if ("https://192.168.1.113" . $_SERVER["REQUEST_URI"] == $_SERVER["HTTP_REFERER"]) {
           echo '<div style="display:flex;width:auto;">
