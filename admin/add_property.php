@@ -46,11 +46,18 @@ if (isset($_GET["id"])) {
                   value="<?= isset($prop) ? htmlspecialchars($prop['title']) : '' ?>" required>
               </div>
 
-              <div class="col-md-6">
-                <label for="price" class="form-label">Price (Flat Amount) <span class="text-danger">*</span></label>
+              <div class="col-md-3">
+                <label for="price" class="form-label">Starting Price <span class="text-danger">*</span></label>
                 <input type="number" class="form-control form-control-lg" id="price" name="price" min="0"
                   value="<?= isset($prop) ? htmlspecialchars($prop['price']) : '' ?>" placeholder="e.g. 15000000" required>
-                <div class="form-text">Enter full amount (e.g. 15000000 for 1.5 Cr). System will format it automatically.</div>
+                <div class="form-text">Full amount (e.g. 1.5 Cr)</div>
+              </div>
+
+              <div class="col-md-3">
+                <label for="price_high" class="form-label">Maximum Price (Optional)</label>
+                <input type="number" class="form-control form-control-lg" id="price_high" name="price_high" min="0"
+                  value="<?= isset($prop) && isset($prop['price_high']) ? htmlspecialchars($prop['price_high']) : '' ?>" placeholder="e.g. 20000000">
+                <div class="form-text">Leave 0 for fixed price</div>
               </div>
 
               <div class="col-md-6">

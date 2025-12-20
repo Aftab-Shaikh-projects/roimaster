@@ -30,14 +30,23 @@ $prop_res = mysqli_query($conn, $prop_sql);
                         </div>
                     </a>
                     <div class="card-body-modern">
-                        <span class="roi-badge-floating">Premium</span>
-                        <span class="price-tag-modern"><?= format_price_indian($row['price']) ?></span>
+                        <?php if (!empty($row['roi'])): ?>
+                            <span class="roi-badge-floating">
+                                Expected ROI : <?= htmlspecialchars($row['roi']) ?><?= strpos($row['roi'], '%') === false ? '%' : '' ?>
+                            </span>
+                        <?php endif; ?>
+                        <span class="price-tag-modern">
+                            <?= format_price_indian($row['price']) ?>
+                            <?= (isset($row['price_high']) && $row['price_high'] > 0) ? ' - ' . format_price_indian($row['price_high']) : '' ?>
+                        </span>
                         <h5 class="card-title"><?= htmlspecialchars($row['title']) ?></h5>
                         <p class="text-muted mb-4"><i class="fa-solid fa-location-dot me-2"
                                 style="color: var(--accent-rich);"></i><?= htmlspecialchars(ucwords($row['sub_location']) . ', ' . ucwords($row['city'])) ?></p>
 
                         <div class="prop-features-modern">
-                            <span><i class="fa-solid fa-bed me-2"></i> <?= htmlspecialchars($row['bhk']) ?></span>
+                                <?php if (!empty($row['bhk'])): ?>
+                                    <span><i class="fa-solid fa-bed me-2"></i> <?= htmlspecialchars($row['bhk']) ?></span>
+                                <?php endif; ?>
                             <span><i class="fa-solid fa-ruler-combined me-2"></i> <?= htmlspecialchars($row['area']) ?></span>
                         </div>
                         <hr class="opacity-25 my-3">

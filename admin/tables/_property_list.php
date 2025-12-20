@@ -72,7 +72,10 @@ $srno = 1 + $offset;
       <tr>
         <td><strong><?= $srno++ ?></strong></td>
         <td><?= htmlspecialchars($name) ?></td>
-        <td>₹ <?= AmountFormat($row['price']) ?></td>
+        <td>
+          ₹ <?= AmountFormat($row['price']) ?>
+          <?= ($row['price_high'] > 0) ? ' - ' . AmountFormat($row['price_high']) : '' ?>
+        </td>
         <td><?= htmlspecialchars(ucwords($row['sub_location']) . ', ' . ucwords($row['city'])) ?></td>
         <td>
             <?php if ($row['active'] == 'Y'): ?>

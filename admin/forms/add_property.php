@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ADD / EDIT
     $title = res($_POST["title"]);
     $price = res($_POST["price"]);
+    $price_high = isset($_POST["price_high"]) ? res($_POST["price_high"]) : 0;
     // Auto-construct Location string for DB (Standardized format)
     // We do this AFTER resolving city logic below
     
@@ -103,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $sql = "UPDATE `properties` SET 
               `title`='$title', 
               `price`='$price', 
+              `price_high`='$price_high',
               `location`='$location', 
               `bhk`='$bhk', 
               `area`='$area', 
@@ -133,8 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
            // For now, let it be empty or require validation frontend side (which is there).
       }
       
-      $sql = "INSERT INTO `properties` (`title`, `price`, `location`, `bhk`, `area`, `type`, `possession`, `image`, `map_url`, `description`, `features`, `roi`, `city`, `sub_location`, `comm_type`, `active`) 
-              VALUES ('$title', '$price', '$location', '$bhk', '$area', '$type', '$possession', '$image', '$map_url', '$description', '$features', '$roi', '$city', '$sub_location', '$comm_type', '$active')";
+      $sql = "INSERT INTO `properties` (`title`, `price`, `price_high`, `location`, `bhk`, `area`, `type`, `possession`, `image`, `map_url`, `description`, `features`, `roi`, `city`, `sub_location`, `comm_type`, `active`) 
+              VALUES ('$title', '$price', '$price_high', '$location', '$bhk', '$area', '$type', '$possession', '$image', '$map_url', '$description', '$features', '$roi', '$city', '$sub_location', '$comm_type', '$active')";
 
       if (mysqli_query($conn, $sql)) {
         set_alert("Property Added Successfully", "success", "");
