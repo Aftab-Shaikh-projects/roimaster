@@ -491,7 +491,7 @@ $hero_is_video = in_array($ext, ['mp4', 'webm']);
         font-size: 1.2rem;
     }
 
-    /* Contact Card */
+    /* Contact Card */x
     .contact-card {
         border-radius: 20px;
         overflow: hidden;
@@ -507,7 +507,7 @@ $hero_is_video = in_array($ext, ['mp4', 'webm']);
     }
     .contact-body {
         padding: 30px;
-        background: #dddada2b;
+        background: #f6f4f4;
     }
     .btn-gold {
         background: var(--gold-primary);
