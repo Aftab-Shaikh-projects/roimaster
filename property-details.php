@@ -57,14 +57,19 @@ $hero_is_video = in_array($ext, ['mp4', 'webm']);
             <span class="badge bg-gold text-dark mb-4 px-4 py-2 fw-bold text-uppercase tracking-wider">For Sale</span>
             <h1 class="display-2 fw-bold text-white mb-2" style="font-family: 'Playfair Display', serif;"><?php echo htmlspecialchars($prop['title']); ?></h1>
             <p class="lead text-white-80 mb-4 fs-4"><i class="fa-solid fa-location-dot me-2 text-gold"></i><?php echo htmlspecialchars(ucwords($prop['sub_location']) . ', ' . ucwords($prop['city'])); ?></p>
-            <h2 class="text-gold fw-bold display-4"><?php echo format_price_indian($prop['price']); ?></h2>
+            <h2 class="text-gold fw-bold display-4">
+                <?php echo format_price_indian($prop['price']); ?>
+                <?php echo (isset($prop['price_high']) && $prop['price_high'] > 0) ? ' - ' . format_price_indian($prop['price_high']) : ''; ?>
+            </h2>
             
             <div class="d-flex justify-content-center gap-4 mt-5 text-white">
+                <?php if (!empty($prop['bhk'])): ?>
                 <div class="stat-bubble">
                     <i class="fa-solid fa-bed fs-4 mb-1"></i>
                     <span class="d-block fw-bold"><?php echo $prop['bhk']; ?></span>
                 </div>
                 <div class="vert-line"></div>
+                <?php endif; ?>
                 <div class="stat-bubble">
                     <i class="fa-solid fa-ruler-combined fs-4 mb-1"></i>
                     <span class="d-block fw-bold"><?php echo $prop['area']; ?></span>
