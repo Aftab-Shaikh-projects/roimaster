@@ -1,70 +1,62 @@
-<?php include 'layouts/header.php'; ?>
+<?php
+include 'layouts/header.php';
+$page_title = "Contact Messages";
+?>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <h5 class="card-header pb-0">Contact Messages</h5>
-            <div class="card-body mt-3">
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Client Name</th>
-                                <th>Contact</th>
-                                <th>Subject</th>
-                                <th>Message</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            <?php
-                            $sql = "SELECT * FROM `contact_enquiries` ORDER BY `created_at` DESC";
-                            $res = mysqli_query($conn, $sql);
-                            
-                            if (mysqli_num_rows($res) > 0) {
-                                $i = 1;
-                                while ($row = mysqli_fetch_assoc($res)) {
-                                    ?>
-                                    <tr>
-                                        <td><?= $i++; ?></td>
-                                        <td><?= date('d M Y, h:i A', strtotime($row['created_at'])) ?></td>
-                                        <td><?= htmlspecialchars($row['name']) ?></td>
-                                        <td>
-                                            <a href="mailto:<?= htmlspecialchars($row['email']) ?>"><?= htmlspecialchars($row['email']) ?></a><br>
-                                            <a href="tel:<?= htmlspecialchars($row['phone']) ?>"><?= htmlspecialchars($row['phone']) ?></a>
-                                        </td>
-                                        <td><span class="badge bg-label-primary"><?= htmlspecialchars($row['subject']) ?></span></td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#msgModal<?= $row['id'] ?>">
-                                                View Message
-                                            </button>
+<div class="card shadow-sm border-0 p-3 mb-4 rounded-3 bg-light">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-0 fw-bold text-primary">
+            <i class="bx bx-message-square-dots me-2"></i> <?= $page_title ?>
+        </h2>
+    </div>
+</div>
 
-                                            <!-- Message Modal -->
-                                            <div class="modal fade" id="msgModal<?= $row['id'] ?>" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Message from <?= htmlspecialchars($row['name']) ?></h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p><strong>Subject:</strong> <?= htmlspecialchars($row['subject']) ?></p>
-                                                            <p class="mb-0"><?= nl2br(htmlspecialchars($row['message'])) ?></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            } else {
-                                echo "<tr><td colspan='6' class='text-center'>No messages found yet.</td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-body">
+
+        <div class="row mb-3 g-2 align-items-center">
+            <div class="col-md-6 col-8">
+                <div class="input-group">
+                    <span class="input-group-text bg-primary text-white"><i class="bx bx-search"></i></span>
+                    <input type="text"
+                        onkeyup="pagination(1,'_contact_messages.php')"
+                        name="search"
+                        placeholder="Search name, email or subject..."
+                        class="form-control filters">
+                </div>
+            </div>
+
+            <div class="col-md-3 col-4">
+                <select name="limitSetter"
+                    onchange="pagination(1,'_contact_messages.php')"
+                    class="form-select filters">
+                    <option value="5">5 per page</option>
+                    <option value="10" selected>10 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="50">50 per page</option>
+                    <option value="100">100 per page</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="alltable" class="table-responsive"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="msgModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title text-white" id="modalTitle">Message Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="small text-muted fw-bold text-uppercase">Subject</label>
+                    <div class="p-2 bg-light rounded border text-dark mb-3 fw-bold" id="modalSubject"></div>
+                    
+                    <label class="small text-muted fw-bold text-uppercase">Message</label>
+                    <div class="p-3 bg-light rounded border text-dark" id="modalMessage"></div>
                 </div>
             </div>
         </div>
@@ -72,3 +64,25 @@
 </div>
 
 <?php include 'layouts/footer.php'; ?>
+
+<script>
+    $(document).ready(function() {
+        // Load initial data on page load
+        pagination(1, "_contact_messages.php");
+    });
+
+    // Handle "View Message" Button Click
+    $(document).on("click", ".view-msg", function() {
+        var name = $(this).attr("data-name");
+        var subject = $(this).attr("data-subject");
+        var message = $(this).attr("data-message");
+        
+        // Update Modal Content
+        $('#modalTitle').text('Message from ' + name);
+        $('#modalSubject').text(subject);
+        
+        // Handle empty messages and newlines
+        var displayMsg = message ? message.replace(/\n/g, "<br>") : '<span class="text-muted fst-italic">No message provided.</span>';
+        $('#modalMessage').html(displayMsg);
+    });
+</script>

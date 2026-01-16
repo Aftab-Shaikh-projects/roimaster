@@ -35,8 +35,14 @@
       </a>
     <li class="menu-item">
       <a href="enquiries.php" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-buildings"></i>
+        <div>Site visit</div>
+      </a>
+    </li>
+     <li class="menu-item">
+      <a href="video_requests.php" class="menu-link">
         <i class="menu-icon tf-icons bx bx-message-square-detail"></i>
-        <div>Enquiries</div>
+        <div>Video Requests</div>
       </a>
     </li>
     <li class="menu-item">

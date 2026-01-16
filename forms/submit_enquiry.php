@@ -12,6 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conn, trim($_POST['email']));
     $phone = mysqli_real_escape_string($conn, trim($_POST['phone']));
     $message = mysqli_real_escape_string($conn, trim($_POST['message']));
+    $Date = mysqli_real_escape_string($conn, trim($_POST['Date']));
 
     // Validation (Basic)
     if (empty($name) || empty($email) || empty($phone)) {
@@ -25,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert Query
-    $sql = "INSERT INTO `property_enquiries` (`property_id`, `name`, `email`, `phone`, `message`) 
-            VALUES ('$property_id', '$name', '$email', '$phone', '$message')";
+    $sql = "INSERT INTO `property_enquiries` (`property_id`, `name`, `email`, `phone`, `message`, `Date`) 
+            VALUES ('$property_id', '$name', '$email', '$phone', '$message','$Date')";
 
     if (mysqli_query($conn, $sql)) {
         $_SESSION['alert'] = [

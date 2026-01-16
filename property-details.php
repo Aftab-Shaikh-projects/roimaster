@@ -219,38 +219,174 @@ $hero_is_video = in_array($ext, ['mp4', 'webm']);
             </div>
 
             <!-- Sidebar -->
-            <div class="col-lg-4">
-                <div class="contact-card sticky-top" style="top: 100px;">
-                    <div class="contact-header">
-                        <h4 class="fw-bold mb-1" style="font-family: 'Playfair Display', serif;">Schedule a Site Visit / Video Presentation!</h4>
-                        <p class="mb-0 small opacity-75">Direct access to sales team</p>
+           <div class="col-lg-4">
+                <div class="sticky-top" style="top: 100px; z-index: 10;">
+                    <style>
+    /* Add these variables if they aren't already in your :root */
+:root {
+    --primary-deep: #06142E; /* Your Dark Navy Brand Color */
+    --gold-primary: #C5A47E; /* Your Gold Brand Color */
+}
+
+/* Talk to Expert Button Styling */
+.btn-expert {
+    background-color: var(--primary-deep); /* Uses your site's dark blue */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px; /* Matches your other inputs */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-expert:hover {
+    background-color: #0a1f45; /* Slightly lighter navy on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(6, 20, 46, 0.2);
+}
+
+/* Helper classes for colors inside the button */
+.text-primary-deep {
+    color: var(--primary-deep) !important;
+}
+.text-gold {
+    color: var(--gold-primary) !important;
+}
+
+/* Pulse Animation (Gold Glow) */
+@keyframes pulse-gold {
+    0% { box-shadow: 0 0 0 0 rgba(197, 164, 126, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(197, 164, 126, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(197, 164, 126, 0); }
+}
+
+.pulse-effect {
+    animation: pulse-gold 2s infinite;
+}
+</style>
+
+<div class="talk-to-expert-container mb-4">
+    <a href="tel:+917208565700" class="btn btn-expert w-100 d-flex align-items-center justify-content-between p-3 shadow-sm pulse-effect">
+        <div class="d-flex align-items-center">
+            <div class="icon-box bg-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width:40px; height:40px;">
+                <i class="fa-solid fa-phone text-primary-deep"></i>
+            </div>
+            <div class="text-start">
+                <span class="d-block small text-white-50 text-uppercase">Have Questions?</span>
+                <span class="fw-bold text-white fs-5">Talk to Our Experts</span>
+            </div>
+        </div>
+        <i class="fa-solid fa-chevron-right text-gold"></i>
+    </a>
+</div>
+                    
+                    <div class="contact-card mb-4" style="border: 2px solid var(--gold-primary);">
+                        <div class="contact-header ">
+                            <h4 class="fw-bold mb-1" style="font-family: 'Playfair Display', serif;">Schedule a Site Visit</h4>
+                            <p class="mb-0 small opacity-75">Book a physical tour</p>
+                        </div>
+                        <div class="contact-body">
+                            <?php if(isset($_SESSION['msg'])): ?>
+                                <div class="alert alert-<?= $_SESSION['msg_type']; ?> alert-dismissible fade show" role="alert">
+                                    <?= $_SESSION['msg']; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <?php unset($_SESSION['msg']); unset($_SESSION['msg_type']); ?>
+                            <?php endif; ?>
+
+                            <form action="forms/submit_enquiry.php" method="POST">
+                                <input type="hidden" name="property_id" value="<?= htmlspecialchars($prop_id) ?>">
+                                
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" required>
+                                    <label for="floatingName">Your Name</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com" required>
+                                    <label for="floatingEmail">Email Address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="tel" class="form-control" name="phone" id="floatingPhone" placeholder="Phone" required>
+                                    <label for="floatingPhone">Phone</label>
+                                </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="date" class="form-control" name="Date" id="Date" required min="<?= date('Y-m-d'); ?>">
+                                            <label for="Date">Date</label>
+                                        </div>
+                                <div class="form-floating mb-4">
+                                    <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingText" style="height: 100px"></textarea>
+                                    <label for="floatingText">Message</label>
+                                </div>
+                                <button type="submit" class="btn btn-gold w-100 py-3 fw-bold shadow-lg">
+                                    <i class="fa-solid fa-calendar-check me-2"></i> Schedule Visit
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="contact-body">
-                        <form action="forms/submit_enquiry.php" method="POST">
-                            <input type="hidden" name="property_id" value="<?= htmlspecialchars($prop_id) ?>">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" required>
-                                <label for="floatingName">Your Name</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="name@example.com" required>
-                                <label for="floatingEmail">Email Address</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" name="phone" id="floatingPhone" placeholder="Phone" required>
-                                <label for="floatingPhone">Phone Number</label>
-                            </div>
-                            <div class="form-floating mb-4">
-                                <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingText" style="height: 100px"></textarea>
-                                <label for="floatingText">Message</label>
-                            </div>
-                            <button type="submit" class="btn btn-gold w-100 py-3 fw-bold shadow-lg">
-                                <i class="fa-solid fa-paper-plane me-2"></i> Schedule Viewing
-                            </button>
-                        </form>
+
+                    <div class="contact-card mb-4" style="border: 2px solid var(--gold-primary);">
+                        <div class="contact-header bg-white  border-bottom">
+                            <h4 class="fw-bold mb-1 " style="font-family: 'Playfair Display', serif;">
+                                <i class="fa-solid fa-video  me-2"></i>Video Presentation
+                            </h4>
+                            <p class="mb-0 small">Request a live virtual tour</p>
+                        </div>
+                        <div class="contact-body bg-light">
+                            
+                            <form action="forms/video_enquiry.php" method="POST">
+                                <input type="hidden" name="property_id" value="<?= htmlspecialchars($prop_id) ?>">
+                                <input type="hidden" name="enc_id" value="<?= htmlspecialchars($enc_id) ?>">
+                                
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="name" id="vcName" placeholder="Name" required>
+                                    <label for="vcName">Full Name</label>
+                                </div>
+                                
+                                <div class="row g-2 mb-3">
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" name="mobile" id="vcMobile" placeholder="Mobile" required>
+                                            <label for="vcMobile">Mobile No</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" name="email" id="vcEmail" placeholder="Email">
+                                            <label for="vcEmail">Email Id</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-2 mb-3">
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" name="vc_date" id="vcDate" required min="<?= date('Y-m-d'); ?>">
+                                            <label for="vcDate">Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="time" class="form-control" name="vc_time" id="vcTime" required>
+                                            <label for="vcTime">Time</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" name="remark" id="vcRemark" placeholder="Remark" style="height: 80px"></textarea>
+                                    <label for="vcRemark">Remark / Questions</label>
+                                </div>
+
+                                <button type="submit" class="btn btn-gold w-100 py-3 fw-bold shadow-lg">
+                                    Request Video Call
+                                </button>
+                            </form>
+                        </div>
                     </div>
+
                 </div>
             </div>
+
+            
         </div>
     </div>
 </section>
@@ -371,7 +507,7 @@ $hero_is_video = in_array($ext, ['mp4', 'webm']);
     }
     .contact-body {
         padding: 30px;
-        background: #fff;
+        background: #dddada2b;
     }
     .btn-gold {
         background: var(--gold-primary);

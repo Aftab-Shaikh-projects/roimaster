@@ -1,76 +1,91 @@
-<?php include 'layouts/header.php'; ?>
+<?php
+include 'layouts/header.php';
+$page_title = "Property Enquiries";
+?>
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <h5 class="card-header pb-0">Property Enquiries</h5>
-            <div class="card-body mt-3">
-                <div class="table-responsive text-nowrap">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Property</th>
-                                <th>Client Name</th>
-                                <th>Contact</th>
-                                <th>Message</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            <?php
-                            $sql = "SELECT e.*, p.title as property_title 
-                                    FROM `property_enquiries` e
-                                    JOIN `properties` p ON e.property_id = p.id
-                                    ORDER BY e.created_at DESC";
-                            $res = mysqli_query($conn, $sql);
-                            
-                            if (mysqli_num_rows($res) > 0) {
-                                $i = 1;
-                                while ($row = mysqli_fetch_assoc($res)) {
-                                    ?>
-                                    <tr>
-                                        <td><?= $i++; ?></td>
-                                        <td><?= date('d M Y, h:i A', strtotime($row['created_at'])) ?></td>
-                                        <td><strong><?= htmlspecialchars($row['property_title']) ?></strong></td>
-                                        <td><?= htmlspecialchars($row['name']) ?></td>
-                                        <td>
-                                            <a href="mailto:<?= htmlspecialchars($row['email']) ?>"><?= htmlspecialchars($row['email']) ?></a><br>
-                                            <a href="tel:<?= htmlspecialchars($row['phone']) ?>"><?= htmlspecialchars($row['phone']) ?></a>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#msgModal<?= $row['id'] ?>">
-                                                View Message
-                                            </button>
+<div class="card shadow-sm border-0 p-3 mb-4 rounded-3 bg-light">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-0 fw-bold text-primary">
+            <i class="bx bx-envelope me-2"></i> <?= $page_title ?>
+        </h2>
+    </div>
+</div>
 
-                                            <!-- Message Modal -->
-                                            <div class="modal fade" id="msgModal<?= $row['id'] ?>" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Message from <?= htmlspecialchars($row['name']) ?></h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p class="mb-0"><?= nl2br(htmlspecialchars($row['message'])) ?></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            } else {
-                                echo "<tr><td colspan='6' class='text-center'>No enquiries found yet.</td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-body">
+
+        <?php if (isset($_SESSION['msg'])): ?>
+            <div class="alert alert-<?= $_SESSION['msg_type']; ?> alert-dismissible fade show mb-4" role="alert">
+                <?= $_SESSION['msg']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['msg']); unset($_SESSION['msg_type']); ?>
+        <?php endif; ?>
+
+        <div class="row mb-3 g-2 align-items-center">
+            <div class="col-md-6 col-8">
+                <div class="input-group">
+                    <span class="input-group-text bg-primary text-white"><i class="bx bx-search"></i></span>
+                    <input type="text"
+                        onkeyup="pagination(1,'_property_enquiries.php')"
+                        name="search"
+                        placeholder="Search name, email or property..."
+                        class="form-control filters">
                 </div>
             </div>
+
+            <div class="col-md-3 col-4">
+                <select name="limitSetter"
+                    onchange="pagination(1,'_property_enquiries.php')"
+                    class="form-select filters">
+                    <option value="5">5 per page</option>
+                    <option value="10" selected>10 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="50">50 per page</option>
+                    <option value="100">100 per page</option>
+                </select>
+            </div>
         </div>
+
+        <div id="alltable" class="table-responsive"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="msgModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title text-white" id="modalTitle">Message Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="small text-muted fw-bold text-uppercase">Client Message</label>
+                    <div class="p-3 bg-light rounded border text-dark" id="modalMessage"></div>
+                </div>
+            </div>
+            </div>
     </div>
 </div>
 
 <?php include 'layouts/footer.php'; ?>
+
+<script>
+    $(document).ready(function() {
+        // Load initial data on page load
+        pagination(1, "_property_enquiries.php");
+    });
+
+    // Handle "View Message" Button Click
+    $(document).on("click", ".view-msg", function() {
+        var name = $(this).attr("data-name");
+        var message = $(this).attr("data-message");
+        
+        // Update Modal Content
+        $('#modalTitle').text('Message from ' + name);
+        
+        // Handle empty messages and newlines
+        var displayMsg = message ? message.replace(/\n/g, "<br>") : '<span class="text-muted fst-italic">No message provided.</span>';
+        $('#modalMessage').html(displayMsg);
+    });
+</script>
