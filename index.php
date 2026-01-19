@@ -351,7 +351,7 @@
                         <span>Real Estate Magnate</span>
                     </div>
                 </div>
-                <p class="testimonial-text">"ROIMaster isn't just a platform; it's a strategic partner. Their insights into commercial real estate helped me optimize my portfolio for maximum yield. Exceptional service."</p>
+                <p class="testimonial-text">"THEROIMaster isn't just a platform; it's a strategic partner. Their insights into commercial real estate helped me optimize my portfolio for maximum yield. Exceptional service."</p>
                 <div class="rating">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
@@ -366,7 +366,7 @@
                         <span>Investment Banker</span>
                     </div>
                 </div>
-                <p class="testimonial-text">"I value time and transparency above all. ROIMaster delivers both. The pre-leased assets they presented were fully vetted, making my decision-making process effortless."</p>
+                <p class="testimonial-text">"I value time and transparency above all. THEROIMaster delivers both. The pre-leased assets they presented were fully vetted, making my decision-making process effortless."</p>
                 <div class="rating">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
@@ -381,7 +381,7 @@
                         <span>Tech Entrepreneur</span>
                     </div>
                 </div>
-                <p class="testimonial-text">"Diversifying into real estate was a goal, but I lacked the expertise. ROIMaster's advisory team bridged that gap perfectly. I'm now seeing consistent 8% rental yields."</p>
+                <p class="testimonial-text">"Diversifying into real estate was a goal, but I lacked the expertise. THEROIMaster's advisory team bridged that gap perfectly. I'm now seeing consistent 8% rental yields."</p>
                 <div class="rating">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>
@@ -411,7 +411,7 @@
                         <span>Senior Architect</span>
                     </div>
                 </div>
-                <p class="testimonial-text">"The curation is impeccable. As an architect, I am critical of construction quality, but ROIMaster's listed properties consistently meet the highest standards."</p>
+                <p class="testimonial-text">"The curation is impeccable. As an architect, I am critical of construction quality, but THEROIMaster's listed properties consistently meet the highest standards."</p>
                 <div class="rating">
                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                 </div>

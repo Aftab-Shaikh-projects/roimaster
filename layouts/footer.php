@@ -2,7 +2,7 @@
     <div class="container position-relative z-2">
         <div class="row g-5">
             <div class="col-lg-5 mb-4" data-aos="fade-right">
-                <h4 class="mb-4 font-weight-bold">ROI<span>MASTER</span></h4>
+                <h4 class="mb-4 font-weight-bold">THEROI<span>MASTER</span></h4>
                 <p class="text-white-50 lead">Redefining real estate investment through intelligence, integrity, and
                     exclusive access to premium assets.</p>
                 <div class="mt-4">
@@ -41,7 +41,7 @@
         <hr class="border-secondary mt-5 opacity-25">
         <div class="row align-items-center text-white-50">
             <div class="col-md-6">
-                <small>&copy; 2025 ROIMaster. All rights reserved.</small>
+                <small>&copy; 2025 THEROIMASTER. All rights reserved.</small>
             </div>
             <div class="col-md-6 text-md-end">
             <div class="footer-credit">Design and Developed By <span style="color: #247bb5;">Nexg</span><span

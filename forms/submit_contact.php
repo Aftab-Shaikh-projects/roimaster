@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['alert'] = [
             'type' => 'success',
             'title' => 'Message Sent',
-            'message' => 'Thank you for contacting ROIMaster. We will get back to you shortly.'
+            'message' => 'Thank you for contacting THEROIMaster. We will get back to you shortly.'
         ];
         header("Location: ../contact.php");
         exit;

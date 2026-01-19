@@ -130,7 +130,7 @@
 <section class="about-hero">
     <div class="container">
         <div class="hero-text-box" data-aos="zoom-in">
-            <h5 class="text-gold text-uppercase letter-spacing-2 mb-3">About ROIMaster</h5>
+            <h5 class="text-gold text-uppercase letter-spacing-2 mb-3">About THEROIMASTER</h5>
             <h1 class="display-4 font-heading fw-bold mb-0">Crafting Legacies,<br>Not Just Homes</h1>
         </div>
     </div>
@@ -146,7 +146,7 @@
                     Finding your dream home is a profound and consequential decision. It is the cornerstone of your family's future.
                 </p>
                 <p class="text-grey">
-                    At <strong>ROIMaster</strong>, we don't just facilitate transactions; we guide transformations. We work tirelessly to fulfill every nuanced requirement you possess. With our expert team by your side, you won't need anyone else to navigate the complex landscape of luxury real estate.
+                    At <strong>THEROIMaster</strong>, we don't just facilitate transactions; we guide transformations. We work tirelessly to fulfill every nuanced requirement you possess. With our expert team by your side, you won't need anyone else to navigate the complex landscape of luxury real estate.
                 </p>
                 <div class="signature-text">
                     "We turn your aspirations into addresses."
