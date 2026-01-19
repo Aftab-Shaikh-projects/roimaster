@@ -10,9 +10,9 @@ if (!function_exists('sendSMTPMail')) {
 
     function sendSMTPMail($replyToEmail, $replyToName, $subject, $body) {
         
-        $smtp_email    = 'nexgenntechnologies.notify@gmail.com'; 
-        $smtp_password = 'zuyi rnvk yuxx ntxu';  
-        $admin_email   = 'aftabshaikhrs@gmail.com'; 
+        $smtp_email    = 'roimaster.official@gmail.com'; 
+        $smtp_password = 'jlal ixqc jwjb hejz';  
+        $admin_email   = 'roimaster.official@gmail.com'; 
 
         $mail = new PHPMailer(true);
 
