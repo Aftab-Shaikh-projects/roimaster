@@ -904,14 +904,14 @@ include __DIR__ . '/../includes/db_connect.php';
 
     <!-- Preloader -->
     <div id="preloader">
-        <div class="loader-logo">ROI<span>MASTER</span></div>
+        <div class="loader-logo">THEROI<span>MASTER</span></div>
         <div class="loader-line"></div>
     </div>
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index" data-aos="fade-down">
-                <i class="fa-solid fa-building-columns me-2"></i>ROI<span>MASTER</span>
+                <i class="fa-solid fa-building-columns me-2"></i>THEROI<span>MASTER</span>
             </a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
