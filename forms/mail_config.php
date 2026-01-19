@@ -3,15 +3,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-// Load Composer's autoloader
+
 require '../vendor/autoload.php'; 
 
-// Check if function exists to prevent "Cannot Redeclare" error if included multiple times
 if (!function_exists('sendSMTPMail')) {
 
     function sendSMTPMail($replyToEmail, $replyToName, $subject, $body) {
         
-        // 1. CONFIGURATION
         $smtp_email    = 'nexgenntechnologies.notify@gmail.com'; 
         $smtp_password = 'zuyi rnvk yuxx ntxu';  
         $admin_email   = 'aftabshaikhrs@gmail.com'; 
@@ -19,7 +17,6 @@ if (!function_exists('sendSMTPMail')) {
         $mail = new PHPMailer(true);
 
         try {
-            // Server settings
             $mail->isSMTP();                                            
             $mail->Host       = 'smtp.gmail.com';       
             $mail->SMTPAuth   = true;                                   
@@ -28,7 +25,6 @@ if (!function_exists('sendSMTPMail')) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            
             $mail->Port       = 587;                                    
 
-            // Recipients
             $mail->setFrom($smtp_email, 'ROI Master');
             $mail->addAddress($admin_email);               
             
@@ -36,7 +32,6 @@ if (!function_exists('sendSMTPMail')) {
                  $mail->addReplyTo($replyToEmail, $replyToName);
             }
 
-            // Content
             $mail->isHTML(true);                                  
             $mail->Subject = $subject;
             $mail->Body    = $body;
@@ -44,8 +39,6 @@ if (!function_exists('sendSMTPMail')) {
             $mail->send();
             return true;
         } catch (Exception $e) {
-            // Uncomment line below to debug errors
-            // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             return false;
         }
     }
