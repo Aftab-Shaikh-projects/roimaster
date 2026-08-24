@@ -2,13 +2,12 @@
     <div class="container position-relative z-2">
         <div class="row g-5">
             <div class="col-lg-5 mb-4" data-aos="fade-right">
-                <h4 class="mb-4 font-weight-bold">ROI<span>MASTER</span></h4>
+                <h4 class="mb-4 font-weight-bold">THEROI<span>MASTER</span></h4>
                 <p class="text-white-50 lead">Redefining real estate investment through intelligence, integrity, and
                     exclusive access to premium assets.</p>
                 <div class="mt-4">
-                    <a href="#" class="text-white me-3"><i class="fa-brands fa-linkedin fa-lg"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fa-brands fa-twitter fa-lg"></i></a>
-                    <a href="#" class="text-white"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    <a href="https://www.facebook.com/share/1CwM5K8fSf/" class="text-white me-3" target="_blank"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                    <a href="https://www.instagram.com/roi_master_/?hl=en" class="text-white" target="_blank"><i class="fa-brands fa-instagram fa-lg"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -16,9 +15,9 @@
                 <ul class="list-unstyled footer-links">
                     <li class="mb-2"><a href="index.php">Home</a></li>
                     <li class="mb-2"><a href="about.php">About Us</a></li>
-                    <li class="mb-2"><a href="#">Properties</a></li>
-                    <li class="mb-2"><a href="#">Contact</a></li>
-                    
+                    <li class="mb-2"><a href="properties.php">Properties</a></li>
+                    <li class="mb-2"><a href="contact.php">Contact</a></li>
+
                 </ul>
             </div>
             <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-left" data-aos-delay="200">
@@ -27,7 +26,7 @@
                     <i class="fa-solid fa-phone-volume"></i>
                     <div>
                         <span class="d-block text-white">+91 7208565700</span>
-                        <small>Mon - Sat, 9am - 7pm</small>
+                        <small>Mon - Sun, 10am - 7pm</small>
                     </div>
                 </div>
                 <div class="footer-contact-item mt-3">
@@ -42,7 +41,7 @@
         <hr class="border-secondary mt-5 opacity-25">
         <div class="row align-items-center text-white-50">
             <div class="col-md-6">
-                <small>&copy; 2025 ROIMaster. All rights reserved.</small>
+                <small>&copy; 2025 THEROIMASTER. All rights reserved.</small>
             </div>
             <div class="col-md-6 text-md-end">
             <div class="footer-credit">Design and Developed By <span style="color: #247bb5;">Nexg</span><span
@@ -52,11 +51,24 @@
     </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/lib/bootstrap.bundle.min.js"></script>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/js/lib/aos.js"></script>
+<script src="assets/js/lib/gsap.min.js"></script>
+<script src="assets/js/lib/ScrollTrigger.min.js"></script>
+<script src="assets/js/lib/fancybox.umd.js"></script>
+
+<script>
+    // Fancybox Configuration
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+        thumbs : {
+            autoStart : true
+        },
+        toolbar: "auto",
+        closeButton: "top",
+    });
+</script>
 
 <script>
     // Initialize Animate On Scroll Library
@@ -305,7 +317,7 @@
         }
     });
 
-    // Filter Logic Script (Kept exactly the same)
+    // Filter Logic Script
     function toggleConfig() {
         var typeSelect = document.getElementById("propertyType");
         var selectedValue = typeSelect.value;
@@ -313,20 +325,60 @@
         var resOptions = document.getElementById("residentialOptions");
         var commOptions = document.getElementById("commercialOptions");
 
-        if (selectedValue === "residential") {
+        if (selectedValue === "residential" || selectedValue === "villa") {
             resOptions.style.display = "block";
             commOptions.style.display = "none";
         } else if (selectedValue === "commercial") {
             resOptions.style.display = "none";
             commOptions.style.display = "block";
+        } else {
+            // Plots or others
+            resOptions.style.display = "none";
+            commOptions.style.display = "none";
         }
     }
 </script>
 
 <!-- WhatsApp Button -->
-<a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/917208565700" class="whatsapp-float" target="_blank">
     <i class="fa-brands fa-whatsapp"></i>
 </a>
+
+<!-- Global SweetAlert2 Handler -->
+<?php
+if(isset($_SESSION['alert'])) {
+    $alert = $_SESSION['alert'];
+    $icon = $alert['type']; // success, error, warning, info
+    $title = $alert['title'];
+    $text = $alert['message'];
+    
+    // Custom Gold/Premium Styling for SweetAlert
+    echo "<script>
+    Swal.fire({
+        icon: '$icon',
+        title: '$title',
+        text: '$text',
+        confirmButtonColor: '#C5A47E', // Gold Primary
+        background: '#fff',
+        color: '#06142E',
+        iconColor: '$icon' == 'success' ? '#C5A47E' : '',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        },
+        customClass: {
+            popup: 'rounded-4 shadow-lg',
+            confirmButton: 'px-4 py-2 rounded-3 fw-bold'
+        }
+    });
+    </script>";
+    
+    // Clear Alert
+    unset($_SESSION['alert']);
+}
+?>
 </body>
 
 </html>

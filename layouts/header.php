@@ -1,19 +1,26 @@
-﻿<!DOCTYPE html>
+﻿<?php
+include __DIR__ . '/../includes/db_connect.php';
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROIMaster | The Art of Profitable Living</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>THEROIMaster | The Art of Profitable Living</title>
+    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500&display=swap"
         rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="assets/css/lib/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/lib/fancybox.css" />
+    <!-- SweetAlert2 is JS only, removed from header if it was just script src. Moved to footer/global location if needed, but here it is a script. --> 
+    <!-- Actually, SweetAlert2 script should be local too. -->
+    <script src="assets/js/lib/sweetalert2.all.min.js"></script>
 
     <!-- Three.js only in head -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="assets/js/lib/three.min.js"></script>
 
     <style>
         :root {
@@ -346,7 +353,6 @@
             position: relative;
             z-index: 3;
             /* Top */
-            max-width: 800px;
             padding: 0 20px;
         }
 
@@ -850,6 +856,33 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            /* Fix Mobile Nav Spacing */
+            .nav-link {
+                margin-left: 0 !important;
+                padding: 10px 0;
+            }
+
+            .btn-contact {
+                margin-left: 0 !important;
+                margin-top: 15px;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Remove Brand Hover Effect */
+        .navbar-brand:hover {
+            color: #fff !important;
+        }
+        .navbar.scrolled .navbar-brand:hover {
+            color: var(--primary-deep) !important;
+        }
+
+        /* Fix Burger Icon Visibility on White Background */
+        .navbar.scrolled .navbar-toggler-icon {
+            filter: invert(1);
         }
     </style>
 </head>
@@ -871,14 +904,14 @@
 
     <!-- Preloader -->
     <div id="preloader">
-        <div class="loader-logo">ROI<span>MASTER</span></div>
+        <div class="loader-logo">THEROI<span>MASTER</span></div>
         <div class="loader-line"></div>
     </div>
 
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#" data-aos="fade-down">
-                <i class="fa-solid fa-building-columns me-2"></i>ROI<span>MASTER</span>
+            <a class="navbar-brand" href="index" data-aos="fade-down">
+                <i class="fa-solid fa-building-columns me-2"></i>THEROI<span>MASTER</span>
             </a>
             <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
@@ -886,14 +919,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100"><a class="nav-link" href="index.php">Home</a>
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="100"><a class="nav-link" href="index">Home</a>
                     </li>
-                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="about.php">About
+                    <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="about">About
                             Us</a></li>
+                            <li class="nav-item" data-aos="fade-down" data-aos-delay="200"><a class="nav-link" href="team">Our Team</a></li>
+                            
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="300"><a class="nav-link"
                             href="properties">Properties</a></li>
                     <li class="nav-item" data-aos="fade-down" data-aos-delay="400">
-                        <a class="btn btn-contact ms-3" href="#">Contact Us</a>
+                        <a class="btn btn-contact ms-3" href="contact">Contact Us</a>
                     </li>
                 </ul>
             </div>

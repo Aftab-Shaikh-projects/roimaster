@@ -1,0 +1,418 @@
+.table th,
+.jsgrid .jsgrid-table th,
+.table td,
+.jsgrid .jsgrid-table td {
+  padding: 10px 6px;
+}
+
+.blink_note_icon {
+  font-style: italic;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  top: 0px;
+  right: 7px;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  transform: rotate(8deg);
+}
+
+@keyframes blink_note_icon {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.mandatory::after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+
+.my_alert {
+  /* padding: .75rem 1.25rem; */
+  padding: 0.1rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
+a {
+  text-decoration: none !important;
+  cursor: pointer;
+  color: rgb(1, 91, 217);
+}
+
+.fw_bold {
+  font-weight: bold !important;
+}
+
+.mdi-border-color {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.mdi-delete {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+
+
+.success_mess {
+  background-color: green;
+  color: white;
+}
+
+.danger_mess {
+  background-color: rgb(204, 2, 2);
+  color: white;
+}
+
+.warning_mess {
+  background-color: rgb(204, 133, 2);
+  color: white;
+}
+
+.select2-container {
+  width: 100% !important;
+}
+
+.paginactive {
+  background-color: #4B49AC !important;
+  color: white !important;
+}
+
+table thead tr th {
+  text-transform: capitalize;
+}
+
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .count-indicator .count {
+  position: absolute;
+  left: 33%;
+  width: 17px;
+  height: 18px;
+  border-radius: 100%;
+  background: #AC4949;
+  top: -6px;
+  border: 1px solid #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 10px;
+}
+
+.table_p {
+  /* max-width: 500px !important; */
+  /* min-width: 100px; */
+  text-align: left;
+  white-space: normal;
+  padding: 2px 0px 2px 10px;
+  line-height: normal;
+}
+
+.table_div {
+  max-height: 200px !important;
+  overflow-y: hidden !important;
+  display: block;
+}
+
+.costom_scroll {
+  scrollbar-width: 2px;
+  /* scrollbar-color: #87a5ff #a6a6a682; */
+  scrollbar-color: #4b49ac #a6a6a682;
+  padding-right: 2px;
+  scroll-behavior: smooth;
+}
+
+
+.costom_scroll::-webkit-scrollbar {
+  width: 2px;
+  background-color: #a6a6a682;
+  height: 80%;
+}
+
+.costom_scroll::-webkit-scrollbar-thumb {
+  background-color: #87a5ff;
+}
+
+.costom_scroll:hover {
+  overflow-y: auto !important;
+}
+
+body {
+  position: relative !important;
+}
+
+.term_overflow {
+  max-height: 500px !important;
+  overflow-y: auto !important;
+}
+
+.-label {
+  margin-bottom: 0 !important;
+}
+
+.sow_heading_p {
+  padding: 0 5px;
+}
+
+.sow_heading_p::after {
+  position: absolute;
+  content: ">";
+  color: black;
+  padding: 0 5px;
+  top: 0;
+  left: -15px;
+  transform: rotateZ(0deg);
+  transition: transform 0.10s;
+}
+
+.sow_heading_p_open::after {
+  transform: rotateZ(90deg);
+  transition: transform 0.5s;
+}
+
+.clo_btn {
+  position: relative;
+}
+
+.wfaclass {
+  padding: 15px 0;
+  color: red;
+  font-size: 15px;
+
+}
+
+@media (max-width:768px) {
+  .table_div {
+    overflow-y: auto !important;
+  }
+}
+
+#total_in_words {
+  text-transform: capitalize;
+}
+
+
+#set_notifiaction_list {
+  max-height: 80vh !important;
+  overflow-y: auto;
+}
+
+/* @media print {
+  nav {
+    display: none !important;
+  }
+
+  .navbar {
+    display: none !important;
+  }
+
+  footer {
+    display: none !important;
+  }
+
+  .page-body-wrapper {
+    padding: 0 !important;
+  }
+
+  .main-panel {
+    width: 100% !important;
+  }
+
+  .content-wrapper {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  table {
+    width: 100% !important;
+  }
+
+  .just_for_print {
+    display: none !important;
+  }
+
+  .col-lg-6 {
+    width: 50% !important;
+  }
+
+  .end_in_print {
+    display: flex !important;
+    justify-content: end !important;
+  }
+
+  .d-lg-block {
+    display: block !important;
+  }
+
+  .hr_in_print {
+    border-bottom: 1px solid gray !important;
+  }
+
+  .print_100 {
+    width: 100% !important;
+  }
+
+  .print_responsive {
+    overflow: visible !important;
+  }
+
+  .print_hide {
+    opacity: 0 !important;
+  }
+
+  .table_div {
+    max-height: none !important;
+    overflow: initial !important;
+    text-decoration: none !important;
+  }
+
+  .term_overflow {
+    max-height: none !important;
+    overflow: initial !important;
+  }
+} */
+
+@media print {
+
+
+  nav {
+    display: none !important;
+  }
+
+  th {
+    padding: 5px !important;
+  }
+
+  td {
+    padding: 5px !important;
+  }
+
+  .navbar {
+    display: none !important;
+  }
+
+  footer {
+    display: none !important;
+  }
+
+  .page-body-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .main-panel {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .content-wrapper {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  table {
+    width: 100% !important;
+  }
+
+  .just_for_print {
+    display: none !important;
+  }
+
+  .col-lg-6 {
+    width: 50% !important;
+  }
+
+  .end_in_print {
+    display: flex !important;
+    justify-content: end !important;
+  }
+
+  .d-lg-block {
+    display: block !important;
+  }
+
+  .hr_in_print {
+    border-bottom: 1px solid gray !important;
+  }
+
+  .print_100 {
+    width: 100% !important;
+  }
+
+  .print_responsive {
+    overflow: visible !important;
+    max-height: none !important;
+    overflow: initial !important;
+    text-decoration: none !important;
+  }
+
+  .table-responsive {
+    overflow: visible !important;
+  }
+
+  .print_hide {
+    opacity: 0 !important;
+  }
+
+  .table_div {
+    max-height: none !important;
+    overflow: initial !important;
+    text-decoration: none !important;
+  }
+
+  .term_overflow {
+    max-height: none !important;
+    max-height: unset !important;
+    height: auto !important;
+    overflow: initial !important;
+    white-space: normal !important;
+  }
+
+  .term_overflow * {
+    white-space: normal !important;
+  }
+
+  .term_and_condition_form>div {
+    max-height: unset !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: initial !important;
+  }
+
+  .print_pad_0 {
+    padding: 0 !important;
+  }
+
+  .print_show {
+    display: block !important;
+  }
+
+  table .collapse {
+    display: block !important;
+  }
+
+  .sow_heading_p {
+    display: none !important;
+  }
+}
